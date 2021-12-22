@@ -17,7 +17,7 @@ public class Problems_Algorithm {
 //        mid2.next = mid3;
 //        mid3.next = tail;
 
-        System.out.println(solution.minimumDifference(new int[]{9,4,1,7},2));
+        System.out.println(solution.subarraySum(new int[]{1,1,1},2));
 
     }
     static class Solution {
@@ -3666,6 +3666,210 @@ public class Problems_Algorithm {
 //            }
 //            return res;
 //        }
+
+
+
+//        public boolean containsDuplicate(int[] nums) {
+//            Set<Integer> set = new HashSet<>();
+//            for(int num : nums){
+//                if(set.contains(num)) return true;
+//                set.add(num);
+//            }
+//            return false;
+//        }
+
+
+
+//        public boolean containsNearbyDuplicate(int[] nums, int k) {
+//            HashMap<Integer,Integer> map = new HashMap<>();
+//            for (int i = 0; i < nums.length; i++) {
+//                if(!map.containsKey(nums[i])) {
+//                    map.put(nums[i],i);
+//                    continue;
+//                }
+//                if(Math.abs(i - map.get(nums[i]))<= k )return true;
+//                else map.put(nums[i],i);
+//            }
+//            return false;
+//        }
+
+
+
+//        public int findMaxConsecutiveOnes(int[] nums) {
+//            int res = 0,temp = 0;
+//            for (int i = 0; i < nums.length; i++) {
+//                if(nums[i] == 0) {
+//                    res = Math.max(res, temp);
+//                    temp = 0;
+//                }
+//                else temp++;
+//            }
+//            return Math.max(res,temp);
+//        }
+
+
+
+//        public boolean checkZeroOnes(String s) {
+//            int maxOnes = 0,tempOnes = 0;
+//            int maxZeros = 0,tempZeros = 0;
+//            int currNum;
+//            for (int i = 0; i < s.length(); i++) {
+//                currNum = s.charAt(i) - '0';
+//                if(currNum == 0){
+//                    maxOnes = Math.max(maxOnes,tempOnes);
+//                    tempOnes = 0;
+//                    tempZeros++;
+//                }
+//                else{
+//                    maxZeros = Math.max(maxZeros,tempZeros);
+//                    tempZeros = 0;
+//                    tempOnes++;
+//                }
+//            }
+//            return Math.max(maxOnes,tempOnes) > Math.max(maxZeros,tempZeros);
+//        }
+
+
+
+//        public boolean checkOnesSegment(String s) {
+//            boolean foundFirstZero = false;
+//            int currNum;
+//            for (int i = 0; i < s.length(); i++) {
+//                currNum = s.charAt(i)-'0';
+//                if(currNum == 1 && foundFirstZero) return false;
+//                if(currNum == 0) foundFirstZero = true;
+//            }
+//            return true;
+//        }
+
+
+
+//        public int maxPower(String s) {
+//            int max = 1,tempMax = 1;
+//            char currCh = s.charAt(0);
+//            for (int i = 1; i < s.length(); i++) {
+//                if(s.charAt(i) == currCh) tempMax++;
+//                else{
+//                    max = Math.max(max,tempMax);
+//                    tempMax = 1;
+//                    currCh = s.charAt(i);
+//                }
+//            }
+//            return Math.max(max,tempMax);
+//        }
+
+
+
+//        public List<List<Integer>> minimumAbsDifference(int[] arr) {
+//            List<List<Integer>> res = new ArrayList<>();
+//            Arrays.sort(arr);
+//            int min = Integer.MAX_VALUE,temp;
+//            for (int i = 0; i < arr.length-1; i++) {
+//               temp = arr[i+1] - arr[i];
+//               if(temp == min)
+//                   res.add(Arrays.asList(arr[i],arr[i+1]));
+//               else if(temp < min){
+//                   min = temp;
+//                   res.clear();
+//                   res.add(Arrays.asList(arr[i],arr[i+1]));
+//               }
+//            }
+//            return res;
+//        }
+
+
+
+//        private int gcd(int x, int y){
+//            if(y!=0)return gcd(y,x%y);
+//            return x;
+//        }
+//        public int findGCD(int[] nums) {
+//            int min = Integer.MAX_VALUE,max = Integer.MIN_VALUE;
+//            for(int num : nums){
+//                if(num<min) min = num;
+//                if (num > max) max = num;
+//            }
+//            return gcd(min,max);
+//        }
+
+
+
+
+//        public boolean isThree(int n) {
+//            int c=2;
+//            for(int i=2; i< n-1;i++){
+//                if(n%i==0) c++;
+//                if(c>=4) return false;
+//            }
+//            return c==3;
+//        }
+
+
+
+//        public boolean canWinNim(int n) {
+//            return n%4!=0;
+//        }
+
+
+
+//        public int[] twoSum(int[] nums, int target) {
+//            HashMap<Integer,Integer> map = new HashMap<>();
+//            for (int i = 0; i < nums.length; i++) {
+//                if(map.containsKey(target - nums[i]))
+//                    return new int[]{i,map.get(target - nums[i])};
+//                map.put(nums[i],i);
+//            }
+//            return null;
+//        }
+
+
+
+
+//        public boolean findTarget(TreeNode root, int k) {
+//            Queue<TreeNode> q = new LinkedList<>();
+//            Set<Integer> set = new HashSet<>();
+//            q.add(root);
+//            while (!q.isEmpty()){
+//                TreeNode temp = q.poll();
+//                if(set.contains(k-temp.val))
+//                    return true;
+//                set.add(temp.val);
+//                if(temp.left!=null) q.add(temp.left);
+//                if(temp.right!=null) q.add(temp.right);
+//            }
+//            return false;
+//        }
+
+
+//        public int subarraySum(int[] nums, int k) {
+//            int count = 0,sum = 0;
+//            HashMap<Integer,Integer> map = new HashMap<>();
+//            map.put(0,1);
+//            for (int i = 0; i < nums.length; i++) {
+//                sum+=nums[i];
+//                if(map.containsKey(sum - k))
+//                    count+=map.get(sum-k);
+//                map.put(sum,map.getOrDefault(sum,0)+1);
+//            }
+//            return count;
+//        }
+
+
+
+//        public int pivotIndex(int[] nums) {
+//            int sum = 0,walkedOn = 0;
+//            for(int num:nums) sum+=num;
+//
+//            for (int i = 0; i < nums.length; i++) {
+//                if(sum-nums[i]-walkedOn == walkedOn) return i;
+//                walkedOn+=nums[i];
+//            }
+//            return -1;
+//        }
+
+
+
+
     }
 }
 
