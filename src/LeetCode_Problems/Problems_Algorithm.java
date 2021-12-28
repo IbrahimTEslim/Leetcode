@@ -1,5 +1,7 @@
 package LeetCode_Problems;
 
+import jdk.nashorn.internal.runtime.regexp.joni.constants.OPCode;
+
 import java.util.*;
 
 
@@ -14,12 +16,14 @@ public class Problems_Algorithm {
 
         head.next = mid1;
         mid1.next = mid2;
-//        mid2.next = mid3;
-//        mid3.next = tail;
+        mid2.next = mid3;
+        mid3.next = tail;
 
-        System.out.println(solution.subarraySum(new int[]{1,1,1},2));
+        int[][] in = new int[][]{{1,3},{-2,2}};
+        System.out.println(Arrays.deepToString(solution.kClosest(in,1)));
 
     }
+
     static class Solution {
 
         public static class ListNode {
@@ -69,7 +73,8 @@ public class Problems_Algorithm {
             public Node right;
             public Node next;
 
-            public Node() {}
+            public Node() {
+            }
 
             public Node(int _val) {
                 val = _val;
@@ -3548,7 +3553,6 @@ public class Problems_Algorithm {
 //        }
 
 
-
 //        public ListNode oddEvenList(ListNode head) {
 //            ListNode odd = new ListNode();
 //            ListNode oddNext = new ListNode();
@@ -3595,7 +3599,6 @@ public class Problems_Algorithm {
 //        }
 
 
-
 //        public int minCostClimbingStairs(int[] cost) {
 //            int first = cost[0];
 //            int sec = cost[1];
@@ -3607,7 +3610,6 @@ public class Problems_Algorithm {
 //            }
 //            return Math.min(first,sec);
 //        }
-
 
 
 //        public List<Integer> findDisappearedNumbers(int[] nums) {
@@ -3627,7 +3629,6 @@ public class Problems_Algorithm {
 //        }
 
 
-
 //        public int findContentChildren(int[] g, int[] s) {
 //            if(s.length == 0) return 0;
 //            Arrays.sort(g); Arrays.sort(s);
@@ -3643,8 +3644,6 @@ public class Problems_Algorithm {
 //        }
 
 
-
-
 //        public int arrayPairSum(int[] nums) {
 //            Arrays.sort(nums);
 //            int res = 0;
@@ -3653,8 +3652,6 @@ public class Problems_Algorithm {
 //            }
 //            return res;
 //        }
-
-
 
 
 //        public int minimumDifference(int[] nums, int k) {
@@ -3668,7 +3665,6 @@ public class Problems_Algorithm {
 //        }
 
 
-
 //        public boolean containsDuplicate(int[] nums) {
 //            Set<Integer> set = new HashSet<>();
 //            for(int num : nums){
@@ -3677,7 +3673,6 @@ public class Problems_Algorithm {
 //            }
 //            return false;
 //        }
-
 
 
 //        public boolean containsNearbyDuplicate(int[] nums, int k) {
@@ -3694,7 +3689,6 @@ public class Problems_Algorithm {
 //        }
 
 
-
 //        public int findMaxConsecutiveOnes(int[] nums) {
 //            int res = 0,temp = 0;
 //            for (int i = 0; i < nums.length; i++) {
@@ -3706,7 +3700,6 @@ public class Problems_Algorithm {
 //            }
 //            return Math.max(res,temp);
 //        }
-
 
 
 //        public boolean checkZeroOnes(String s) {
@@ -3730,7 +3723,6 @@ public class Problems_Algorithm {
 //        }
 
 
-
 //        public boolean checkOnesSegment(String s) {
 //            boolean foundFirstZero = false;
 //            int currNum;
@@ -3741,7 +3733,6 @@ public class Problems_Algorithm {
 //            }
 //            return true;
 //        }
-
 
 
 //        public int maxPower(String s) {
@@ -3757,7 +3748,6 @@ public class Problems_Algorithm {
 //            }
 //            return Math.max(max,tempMax);
 //        }
-
 
 
 //        public List<List<Integer>> minimumAbsDifference(int[] arr) {
@@ -3778,7 +3768,6 @@ public class Problems_Algorithm {
 //        }
 
 
-
 //        private int gcd(int x, int y){
 //            if(y!=0)return gcd(y,x%y);
 //            return x;
@@ -3793,8 +3782,6 @@ public class Problems_Algorithm {
 //        }
 
 
-
-
 //        public boolean isThree(int n) {
 //            int c=2;
 //            for(int i=2; i< n-1;i++){
@@ -3805,11 +3792,9 @@ public class Problems_Algorithm {
 //        }
 
 
-
 //        public boolean canWinNim(int n) {
 //            return n%4!=0;
 //        }
-
 
 
 //        public int[] twoSum(int[] nums, int target) {
@@ -3821,8 +3806,6 @@ public class Problems_Algorithm {
 //            }
 //            return null;
 //        }
-
-
 
 
 //        public boolean findTarget(TreeNode root, int k) {
@@ -3855,7 +3838,6 @@ public class Problems_Algorithm {
 //        }
 
 
-
 //        public int pivotIndex(int[] nums) {
 //            int sum = 0,walkedOn = 0;
 //            for(int num:nums) sum+=num;
@@ -3868,8 +3850,250 @@ public class Problems_Algorithm {
 //        }
 
 
+        class CarrierObj {
+            ListNode left;
+
+            CarrierObj(ListNode l) {
+                this.left = l;
+            }
+        }
+        private void helper_reorderList(ListNode rigth, CarrierObj left) {
+            if (rigth == null) return;
+
+            helper_reorderList(rigth.next, left);
+            if (left.left.next != null && left.left != rigth) {
+                ListNode temp = left.left.next;
+                left.left.next = rigth;
+                rigth.next = temp;
+                left.left = temp;
+            }
+            if (left.left == rigth) left.left.next = null;
+
+        }
+        public void reorderList(ListNode head) {
+            CarrierObj left = new CarrierObj(head);
+            helper_reorderList(head, left);
+        }
 
 
+
+        public List<Integer> inorderTraversal(TreeNode root) {
+            List<Integer> res = new ArrayList<>();
+            Stack<TreeNode> stack = new Stack<>();
+            TreeNode curr = root;
+            while (curr != null || !stack.empty()){
+                while (curr != null){
+                    stack.push(curr);
+                    curr = curr.left;
+                }
+                curr = stack.pop();
+                res.add(curr.val);
+                curr = curr.right;
+            }
+            return res;
+        }
+
+
+
+        public int kthSmallest(TreeNode root, int k) {
+            List<Integer> res = new ArrayList<>();
+            Stack<TreeNode> stack = new Stack<>();
+            TreeNode curr = root;
+            while (curr != null || !stack.empty()) {
+                while (curr != null) {
+                    stack.push(curr);
+                    curr = curr.left;
+                }
+                curr = stack.pop();
+                res.add(curr.val);
+                if(res.size()==k) break;
+                curr = curr.right;
+            }
+            return res.get(res.size()-1);
+        }
+
+
+
+        private void helper_findSecondMinimumValue(TreeNode root, int[] min,long[] ans) {
+            if(root != null){
+                if(min[0] < root.val && root.val < ans[0])
+                    ans[0] = root.val;
+                else if(min[0] == root.val){
+                    helper_findSecondMinimumValue(root.left,min,ans);
+                    helper_findSecondMinimumValue(root.right,min,ans);
+                }
+            }
+        }
+        public int findSecondMinimumValue(TreeNode root) {
+           int[] min = {root.val};
+           long[] ans = {Long.MAX_VALUE};
+           helper_findSecondMinimumValue(root,min,ans);
+           return ans[0] < Long.MAX_VALUE ? (int) ans[0] : -1;
+        }
+
+
+
+        public int[][] merge(int[][] intervals) {
+            Arrays.sort(intervals,Comparator.comparingInt(o->o[0]));
+            ArrayList<int[]> res = new ArrayList<>();
+            int[] temp;
+            int currE = intervals[0][1];
+            int s = intervals[0][0];
+            int tempS, tempE;
+            for (int i = 1; i < intervals.length; i++) {
+                tempS = intervals[i][0];
+                tempE = intervals[i][1];
+
+                if (currE >= tempS) currE = Math.max(tempE,currE);
+                else {
+                    temp = new int[]{s, currE};
+                    res.add(temp);
+                    s = tempS;
+                    currE = Math.max(tempE,currE);
+                }
+            }
+            temp = new int[]{s,currE};
+            res.add(temp);
+            return res.toArray(new int[res.size()][2]);
+        }
+
+
+
+        public int findPoisonedDuration(int[] timeSeries, int duration) {
+            int res = duration;
+            for (int i = 0; i < timeSeries.length-1; i++) {
+                if(timeSeries[i+1] - timeSeries[i] >= duration) res+=duration;
+                else res+=timeSeries[i+1] - timeSeries[i];
+            }
+            return res;
+        }
+
+
+
+        public boolean canPlaceFlowers(int[] flowerbed, int n) {
+            if(n==0) return true;
+            if(flowerbed.length == 1) {
+                if(flowerbed[0] == 0) return n == 1;
+                else return false;
+            }
+            if(flowerbed[0] == 0 && flowerbed[1] == 0) {
+                flowerbed[0] = 1;
+                n--;
+            }
+            if(flowerbed[flowerbed.length-1] == 0 && flowerbed[flowerbed.length-2] == 0) {
+                flowerbed[flowerbed.length-1] = 1;
+                n--;
+            }
+            if(n <= 0) return true;
+            for (int i = 1; i < flowerbed.length-1; i++) {
+                if(flowerbed[i] == 0){
+                    if(flowerbed[i-1] == 0 && flowerbed[i+1] == 0) {
+                        flowerbed[i] = 1;
+                        i++;
+                        if(--n <= 0 ) return true;
+                    }
+
+                }
+            }
+            return false;
+        }
+
+
+
+        public int[] asteroidCollision(int[] asteroids) {
+            Stack<Integer> stack = new Stack();
+            for (int ast: asteroids) {
+                collision: {
+                    while (!stack.isEmpty() && ast < 0 && 0 < stack.peek()) {
+                        if (stack.peek() < -ast) {
+                            stack.pop();
+                            continue;
+                        } else if (stack.peek() == -ast) {
+                            stack.pop();
+                        }
+                        break collision;
+                    }
+                    stack.push(ast);
+                }
+            }
+
+            int[] res = new int[stack.size()];
+            for (int i = stack.size()-1; i >= 0; i--) {
+                res[i] = stack.pop();
+            }
+            return res;
+        }
+
+
+
+        public int maximumElementAfterDecrementingAndRearranging(int[] arr) {
+            Arrays.sort(arr);
+            int temp = Math.abs(arr[0] - 1);
+            for (int i = 0; i < arr.length-1; i++) {
+                arr[i] = arr[i] - temp;
+                temp = arr[i] == arr[i+1] ? 0 : arr[i+1]-arr[i] - 1;
+            }
+            return arr[arr.length-1] - temp;
+        }
+
+
+
+
+        public int calculate(String s) {
+            int result = 0,inner = 0,outer = 0;
+            char opt = '+';
+            for(char c : (s+"+").toCharArray()){
+                if(Character.isWhitespace(c)) continue;
+                if(Character.isDigit(c)) inner = inner*10 + (c - '0');
+                else{
+                    switch (opt){
+                        case '+':
+                            result += outer;
+                            outer = inner;
+                            break;
+                        case '-':
+                            result+=outer;
+                            outer=-inner;
+                            break;
+                        case '*':
+                            outer *= inner;
+                            break;
+                        case '/':
+                            outer/=inner;
+                            break;
+                    }
+                    inner = 0; opt = c;
+                }
+            }
+            return result + outer;
+        }
+
+
+
+
+        class Point implements Comparable<Point>{
+            int x,y;
+            double distance;
+            Point(int x,int y){this.x = x; this.y = y; this.distance = Math.sqrt(x*x + y*y);}
+
+            @Override
+            public int compareTo(Point o2) {
+                if(this.distance > o2.distance) return 1;
+                if(this.distance == o2.distance) return 0;
+                else return -1;
+            }
+        }
+        public int[][] kClosest(int[][] points, int k) {
+            Point[] Opoints = new Point[points.length];
+            int pointer = 0;
+            for(int[] p : points) Opoints[pointer++] = new Point(p[0],p[1]);
+            Arrays.sort(Opoints);
+            int[][] res = new int[k][2];
+            for (int i = 0; i < k; i++) {
+                res[i] = new int[]{Opoints[i].x,Opoints[i].y};
+            }
+            return res;
+        }
     }
 }
 
