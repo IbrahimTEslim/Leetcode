@@ -1,8 +1,8 @@
 package LeetCode_Problems;
 
-import jdk.nashorn.internal.runtime.regexp.joni.constants.OPCode;
-
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 public class Problems_Algorithm {
@@ -19,8 +19,8 @@ public class Problems_Algorithm {
         mid2.next = mid3;
         mid3.next = tail;
 
-        int[][] in = new int[][]{{1,3},{-2,2}};
-        System.out.println(Arrays.deepToString(solution.kClosest(in,1)));
+        int[][] in = new int[][]{{1,3},{1,4},{2,3},{2,4},{4,3}};
+        System.out.println(solution.findMin(new int[]{9,9,9,9,9,9,9,9,9,9}));
 
     }
 
@@ -2832,19 +2832,15 @@ public class Problems_Algorithm {
 //
 //
 //        public ListNode middleNode(ListNode head) {
-//            ListNode walker = head;
-//            int length = 0;
-//            while (walker != null) {
-//                walker = walker.next;
-//                length++;
+//             ListNode slow = head,fast = head;
+//            while (fast != null){
+//            if(fast.next == null) return slow;
+//            fast = fast.next;
+//            if(fast.next==null) return slow.next;
+//            fast = fast.next;
+//            slow = slow.next;
 //            }
-//            for (int i = 0; i < length; i++) {
-//                if(i == length/2) {
-//                    return head;
-//                }
-//                head = head.next;
-//            }
-//            return head;
+//            return slow;
 //        }
 //
 //        public boolean exist(char[][] a, String word)
@@ -3850,249 +3846,343 @@ public class Problems_Algorithm {
 //        }
 
 
-        class CarrierObj {
-            ListNode left;
+//        class CarrierObj {
+//            ListNode left;
+//
+//            CarrierObj(ListNode l) {
+//                this.left = l;
+//            }
+//        }
+//        private void helper_reorderList(ListNode rigth, CarrierObj left) {
+//            if (rigth == null) return;
+//
+//            helper_reorderList(rigth.next, left);
+//            if (left.left.next != null && left.left != rigth) {
+//                ListNode temp = left.left.next;
+//                left.left.next = rigth;
+//                rigth.next = temp;
+//                left.left = temp;
+//            }
+//            if (left.left == rigth) left.left.next = null;
+//
+//        }
+//        public void reorderList(ListNode head) {
+//            CarrierObj left = new CarrierObj(head);
+//            helper_reorderList(head, left);
+//        }
+//
+//
+//
+//        public List<Integer> inorderTraversal(TreeNode root) {
+//            List<Integer> res = new ArrayList<>();
+//            Stack<TreeNode> stack = new Stack<>();
+//            TreeNode curr = root;
+//            while (curr != null || !stack.empty()){
+//                while (curr != null){
+//                    stack.push(curr);
+//                    curr = curr.left;
+//                }
+//                curr = stack.pop();
+//                res.add(curr.val);
+//                curr = curr.right;
+//            }
+//            return res;
+//        }
+//
+//
+//
+//        public int kthSmallest(TreeNode root, int k) {
+//            List<Integer> res = new ArrayList<>();
+//            Stack<TreeNode> stack = new Stack<>();
+//            TreeNode curr = root;
+//            while (curr != null || !stack.empty()) {
+//                while (curr != null) {
+//                    stack.push(curr);
+//                    curr = curr.left;
+//                }
+//                curr = stack.pop();
+//                res.add(curr.val);
+//                if(res.size()==k) break;
+//                curr = curr.right;
+//            }
+//            return res.get(res.size()-1);
+//        }
+//
+//
+//
+//        private void helper_findSecondMinimumValue(TreeNode root, int[] min,long[] ans) {
+//            if(root != null){
+//                if(min[0] < root.val && root.val < ans[0])
+//                    ans[0] = root.val;
+//                else if(min[0] == root.val){
+//                    helper_findSecondMinimumValue(root.left,min,ans);
+//                    helper_findSecondMinimumValue(root.right,min,ans);
+//                }
+//            }
+//        }
+//        public int findSecondMinimumValue(TreeNode root) {
+//           int[] min = {root.val};
+//           long[] ans = {Long.MAX_VALUE};
+//           helper_findSecondMinimumValue(root,min,ans);
+//           return ans[0] < Long.MAX_VALUE ? (int) ans[0] : -1;
+//        }
+//
+//
+//
+//        public int[][] merge(int[][] intervals) {
+//            Arrays.sort(intervals,Comparator.comparingInt(o->o[0]));
+//            ArrayList<int[]> res = new ArrayList<>();
+//            int[] temp;
+//            int currE = intervals[0][1];
+//            int s = intervals[0][0];
+//            int tempS, tempE;
+//            for (int i = 1; i < intervals.length; i++) {
+//                tempS = intervals[i][0];
+//                tempE = intervals[i][1];
+//
+//                if (currE >= tempS) currE = Math.max(tempE,currE);
+//                else {
+//                    temp = new int[]{s, currE};
+//                    res.add(temp);
+//                    s = tempS;
+//                    currE = Math.max(tempE,currE);
+//                }
+//            }
+//            temp = new int[]{s,currE};
+//            res.add(temp);
+//            return res.toArray(new int[res.size()][2]);
+//        }
+//
+//
+//
+//        public int findPoisonedDuration(int[] timeSeries, int duration) {
+//            int res = duration;
+//            for (int i = 0; i < timeSeries.length-1; i++) {
+//                if(timeSeries[i+1] - timeSeries[i] >= duration) res+=duration;
+//                else res+=timeSeries[i+1] - timeSeries[i];
+//            }
+//            return res;
+//        }
+//
+//
+//
+//        public boolean canPlaceFlowers(int[] flowerbed, int n) {
+//            if(n==0) return true;
+//            if(flowerbed.length == 1) {
+//                if(flowerbed[0] == 0) return n == 1;
+//                else return false;
+//            }
+//            if(flowerbed[0] == 0 && flowerbed[1] == 0) {
+//                flowerbed[0] = 1;
+//                n--;
+//            }
+//            if(flowerbed[flowerbed.length-1] == 0 && flowerbed[flowerbed.length-2] == 0) {
+//                flowerbed[flowerbed.length-1] = 1;
+//                n--;
+//            }
+//            if(n <= 0) return true;
+//            for (int i = 1; i < flowerbed.length-1; i++) {
+//                if(flowerbed[i] == 0){
+//                    if(flowerbed[i-1] == 0 && flowerbed[i+1] == 0) {
+//                        flowerbed[i] = 1;
+//                        i++;
+//                        if(--n <= 0 ) return true;
+//                    }
+//
+//                }
+//            }
+//            return false;
+//        }
+//
+//
+//
+//        public int[] asteroidCollision(int[] asteroids) {
+//            Stack<Integer> stack = new Stack();
+//            for (int ast: asteroids) {
+//                collision: {
+//                    while (!stack.isEmpty() && ast < 0 && 0 < stack.peek()) {
+//                        if (stack.peek() < -ast) {
+//                            stack.pop();
+//                            continue;
+//                        } else if (stack.peek() == -ast) {
+//                            stack.pop();
+//                        }
+//                        break collision;
+//                    }
+//                    stack.push(ast);
+//                }
+//            }
+//
+//            int[] res = new int[stack.size()];
+//            for (int i = stack.size()-1; i >= 0; i--) {
+//                res[i] = stack.pop();
+//            }
+//            return res;
+//        }
+//
+//
+//
+//        public int maximumElementAfterDecrementingAndRearranging(int[] arr) {
+//            Arrays.sort(arr);
+//            int temp = Math.abs(arr[0] - 1);
+//            for (int i = 0; i < arr.length-1; i++) {
+//                arr[i] = arr[i] - temp;
+//                temp = arr[i] == arr[i+1] ? 0 : arr[i+1]-arr[i] - 1;
+//            }
+//            return arr[arr.length-1] - temp;
+//        }
+//
+//
+//
+//
+//        public int calculate(String s) {
+//            int result = 0,inner = 0,outer = 0;
+//            char opt = '+';
+//            for(char c : (s+"+").toCharArray()){
+//                if(Character.isWhitespace(c)) continue;
+//                if(Character.isDigit(c)) inner = inner*10 + (c - '0');
+//                else{
+//                    switch (opt){
+//                        case '+':
+//                            result += outer;
+//                            outer = inner;
+//                            break;
+//                        case '-':
+//                            result+=outer;
+//                            outer=-inner;
+//                            break;
+//                        case '*':
+//                            outer *= inner;
+//                            break;
+//                        case '/':
+//                            outer/=inner;
+//                            break;
+//                    }
+//                    inner = 0; opt = c;
+//                }
+//            }
+//            return result + outer;
+//        }
+//
+//
+//
+//
+//        class Point implements Comparable<Point>{
+//            int x,y;
+//            double distance;
+//            Point(int x,int y){this.x = x; this.y = y; this.distance = Math.sqrt(x*x + y*y);}
+//
+//            @Override
+//            public int compareTo(Point o2) {
+//                if(this.distance > o2.distance) return 1;
+//                if(this.distance == o2.distance) return 0;
+//                else return -1;
+//            }
+//        }
+//        public int[][] kClosest(int[][] points, int k) {
+//            Point[] Opoints = new Point[points.length];
+//            int pointer = 0;
+//            for(int[] p : points) Opoints[pointer++] = new Point(p[0],p[1]);
+//            Arrays.sort(Opoints);
+//            int[][] res = new int[k][2];
+//            for (int i = 0; i < k; i++) {
+//                res[i] = new int[]{Opoints[i].x,Opoints[i].y};
+//            }
+//            return res;
+//        }
 
-            CarrierObj(ListNode l) {
-                this.left = l;
-            }
-        }
-        private void helper_reorderList(ListNode rigth, CarrierObj left) {
-            if (rigth == null) return;
-
-            helper_reorderList(rigth.next, left);
-            if (left.left.next != null && left.left != rigth) {
-                ListNode temp = left.left.next;
-                left.left.next = rigth;
-                rigth.next = temp;
-                left.left = temp;
-            }
-            if (left.left == rigth) left.left.next = null;
-
-        }
-        public void reorderList(ListNode head) {
-            CarrierObj left = new CarrierObj(head);
-            helper_reorderList(head, left);
-        }
 
 
+//        public int[][] insert(int[][] intervals, int[] newInterval) {
+//            int n = intervals.length;
+//            if(n == 0) return new int[][]{newInterval};
+//            ArrayList<int[]> res = new ArrayList<>();
+//            int[] temp = newInterval.clone();
+//
+//            int walker = 0;
+//            while (walker < n && intervals[walker][1] < newInterval[0])
+//                res.add(intervals[walker++]);
+//            temp[0] = Math.min(newInterval[0], walker < n ? intervals[walker][0] : Integer.MAX_VALUE );
+//
+//            while (walker < n && intervals[walker][0] <= temp[1])
+//                temp[1] = Math.max(temp[1],intervals[walker++][1] );
+//
+//            res.add(temp);
+//            while (walker < n) res.add(intervals[walker++]);
+//
+//            return res.toArray(new int[res.size()][2]);
+//        }
 
-        public List<Integer> inorderTraversal(TreeNode root) {
-            List<Integer> res = new ArrayList<>();
-            Stack<TreeNode> stack = new Stack<>();
-            TreeNode curr = root;
-            while (curr != null || !stack.empty()){
-                while (curr != null){
-                    stack.push(curr);
-                    curr = curr.left;
+
+
+
+
+//        public int findJudge(int n, int[][] trust) {
+//            int[] trustsBook = new int[n+1];
+//            for(int[] t : trust){
+//                trustsBook[t[0]]--;
+//                trustsBook[t[1]]++;
+//            }
+//            for (int i = 1; i < trustsBook.length; i++)
+//                if(trustsBook[i]==n-1)
+//                    return i;
+//
+//            return -1;
+//        }
+
+
+
+
+//        public int arraySign(int[] nums) {
+//            boolean pos = true;
+//            for(int n:nums)
+//                if(n == 0)
+//                    return 0;
+//                else if(n < 0)
+//                    pos = !pos;
+//
+//            return pos ?1:-1;
+//        }
+
+
+
+
+//        public int numberOfBeams(String[] bank) {
+//            int res = 0,currentNumOfBeams = 0,lastNumOfBeams = 0;
+//            for (int i = 0; i < bank.length; i++) {
+//                for (int j = 0; j < bank[i].length(); j++) {
+//                    if(bank[i].charAt(j)=='1')currentNumOfBeams++;
+//                }
+//                if(currentNumOfBeams == 0)continue;
+//                res += currentNumOfBeams * lastNumOfBeams;
+//                lastNumOfBeams = currentNumOfBeams;
+//                currentNumOfBeams = 0;
+//            }
+//            return res;
+//        }
+
+
+
+        public int findMin(int[] nums) {
+            if(nums[0] < nums[nums.length-1]) return nums[0];
+            int l=0,mid=0,r=nums.length-1;
+            while (l <= r){
+                mid = l + (r-l)/2;
+                if(mid < r && nums[mid] > nums[mid+1]) return nums[mid+1];
+                if(mid > l && nums[mid] < nums[mid-1]) return nums[mid];
+
+                if(r < nums.length && r > l && nums[l] == nums[mid] && nums[l] == nums[r]){
+                    if(nums[r-1]>nums[r]) return nums[r];
+                    r--;
+                    if(nums[l]>nums[l+1]) return nums[l+1];
+                    l++;
                 }
-                curr = stack.pop();
-                res.add(curr.val);
-                curr = curr.right;
-            }
-            return res;
-        }
-
-
-
-        public int kthSmallest(TreeNode root, int k) {
-            List<Integer> res = new ArrayList<>();
-            Stack<TreeNode> stack = new Stack<>();
-            TreeNode curr = root;
-            while (curr != null || !stack.empty()) {
-                while (curr != null) {
-                    stack.push(curr);
-                    curr = curr.left;
-                }
-                curr = stack.pop();
-                res.add(curr.val);
-                if(res.size()==k) break;
-                curr = curr.right;
-            }
-            return res.get(res.size()-1);
-        }
-
-
-
-        private void helper_findSecondMinimumValue(TreeNode root, int[] min,long[] ans) {
-            if(root != null){
-                if(min[0] < root.val && root.val < ans[0])
-                    ans[0] = root.val;
-                else if(min[0] == root.val){
-                    helper_findSecondMinimumValue(root.left,min,ans);
-                    helper_findSecondMinimumValue(root.right,min,ans);
-                }
-            }
-        }
-        public int findSecondMinimumValue(TreeNode root) {
-           int[] min = {root.val};
-           long[] ans = {Long.MAX_VALUE};
-           helper_findSecondMinimumValue(root,min,ans);
-           return ans[0] < Long.MAX_VALUE ? (int) ans[0] : -1;
-        }
-
-
-
-        public int[][] merge(int[][] intervals) {
-            Arrays.sort(intervals,Comparator.comparingInt(o->o[0]));
-            ArrayList<int[]> res = new ArrayList<>();
-            int[] temp;
-            int currE = intervals[0][1];
-            int s = intervals[0][0];
-            int tempS, tempE;
-            for (int i = 1; i < intervals.length; i++) {
-                tempS = intervals[i][0];
-                tempE = intervals[i][1];
-
-                if (currE >= tempS) currE = Math.max(tempE,currE);
-                else {
-                    temp = new int[]{s, currE};
-                    res.add(temp);
-                    s = tempS;
-                    currE = Math.max(tempE,currE);
-                }
-            }
-            temp = new int[]{s,currE};
-            res.add(temp);
-            return res.toArray(new int[res.size()][2]);
-        }
-
-
-
-        public int findPoisonedDuration(int[] timeSeries, int duration) {
-            int res = duration;
-            for (int i = 0; i < timeSeries.length-1; i++) {
-                if(timeSeries[i+1] - timeSeries[i] >= duration) res+=duration;
-                else res+=timeSeries[i+1] - timeSeries[i];
-            }
-            return res;
-        }
-
-
-
-        public boolean canPlaceFlowers(int[] flowerbed, int n) {
-            if(n==0) return true;
-            if(flowerbed.length == 1) {
-                if(flowerbed[0] == 0) return n == 1;
-                else return false;
-            }
-            if(flowerbed[0] == 0 && flowerbed[1] == 0) {
-                flowerbed[0] = 1;
-                n--;
-            }
-            if(flowerbed[flowerbed.length-1] == 0 && flowerbed[flowerbed.length-2] == 0) {
-                flowerbed[flowerbed.length-1] = 1;
-                n--;
-            }
-            if(n <= 0) return true;
-            for (int i = 1; i < flowerbed.length-1; i++) {
-                if(flowerbed[i] == 0){
-                    if(flowerbed[i-1] == 0 && flowerbed[i+1] == 0) {
-                        flowerbed[i] = 1;
-                        i++;
-                        if(--n <= 0 ) return true;
-                    }
-
-                }
-            }
-            return false;
-        }
-
-
-
-        public int[] asteroidCollision(int[] asteroids) {
-            Stack<Integer> stack = new Stack();
-            for (int ast: asteroids) {
-                collision: {
-                    while (!stack.isEmpty() && ast < 0 && 0 < stack.peek()) {
-                        if (stack.peek() < -ast) {
-                            stack.pop();
-                            continue;
-                        } else if (stack.peek() == -ast) {
-                            stack.pop();
-                        }
-                        break collision;
-                    }
-                    stack.push(ast);
-                }
-            }
-
-            int[] res = new int[stack.size()];
-            for (int i = stack.size()-1; i >= 0; i--) {
-                res[i] = stack.pop();
-            }
-            return res;
-        }
-
-
-
-        public int maximumElementAfterDecrementingAndRearranging(int[] arr) {
-            Arrays.sort(arr);
-            int temp = Math.abs(arr[0] - 1);
-            for (int i = 0; i < arr.length-1; i++) {
-                arr[i] = arr[i] - temp;
-                temp = arr[i] == arr[i+1] ? 0 : arr[i+1]-arr[i] - 1;
-            }
-            return arr[arr.length-1] - temp;
-        }
-
-
-
-
-        public int calculate(String s) {
-            int result = 0,inner = 0,outer = 0;
-            char opt = '+';
-            for(char c : (s+"+").toCharArray()){
-                if(Character.isWhitespace(c)) continue;
-                if(Character.isDigit(c)) inner = inner*10 + (c - '0');
                 else{
-                    switch (opt){
-                        case '+':
-                            result += outer;
-                            outer = inner;
-                            break;
-                        case '-':
-                            result+=outer;
-                            outer=-inner;
-                            break;
-                        case '*':
-                            outer *= inner;
-                            break;
-                        case '/':
-                            outer/=inner;
-                            break;
-                    }
-                    inner = 0; opt = c;
+                    if(nums[mid] < nums[l]) r = mid-1;
+                    else l = mid+1;
                 }
             }
-            return result + outer;
-        }
-
-
-
-
-        class Point implements Comparable<Point>{
-            int x,y;
-            double distance;
-            Point(int x,int y){this.x = x; this.y = y; this.distance = Math.sqrt(x*x + y*y);}
-
-            @Override
-            public int compareTo(Point o2) {
-                if(this.distance > o2.distance) return 1;
-                if(this.distance == o2.distance) return 0;
-                else return -1;
-            }
-        }
-        public int[][] kClosest(int[][] points, int k) {
-            Point[] Opoints = new Point[points.length];
-            int pointer = 0;
-            for(int[] p : points) Opoints[pointer++] = new Point(p[0],p[1]);
-            Arrays.sort(Opoints);
-            int[][] res = new int[k][2];
-            for (int i = 0; i < k; i++) {
-                res[i] = new int[]{Opoints[i].x,Opoints[i].y};
-            }
-            return res;
+            return nums[mid];
         }
     }
 }
