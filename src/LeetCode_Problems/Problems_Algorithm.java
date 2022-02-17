@@ -1,12 +1,14 @@
 package LeetCode_Problems;
 
+import com.sun.org.apache.bcel.internal.generic.INEG;
+
+import java.text.DecimalFormat;
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 
 public class Problems_Algorithm {
     public static void main(String[] args) {
+
         Solution solution = new Solution();
         Solution.ListNode head = new Solution.ListNode(1);
         Solution.ListNode mid1 = new Solution.ListNode(2);
@@ -17,11 +19,29 @@ public class Problems_Algorithm {
         head.next = mid1;
         mid1.next = mid2;
         mid2.next = mid3;
-        mid3.next = tail;
+        mid3.next = mid1;
 
-        int[][] in = new int[][]{{1,3},{1,4},{2,3},{2,4},{4,3}};
-        System.out.println(solution.findMin(new int[]{9,9,9,9,9,9,9,9,9,9}));
 
+        Solution.TreeNode root = new Solution.TreeNode(5);
+        Solution.TreeNode left = new Solution.TreeNode(1);
+        Solution.TreeNode right = new Solution.TreeNode(4);
+        Solution.TreeNode leftleft = new Solution.TreeNode(5);
+        Solution.TreeNode leftright = new Solution.TreeNode(15);
+        Solution.TreeNode rightleft = new Solution.TreeNode(3);
+        Solution.TreeNode rightright = new Solution.TreeNode(6);
+
+        root.left = left;
+        root.right = right;
+
+//        left.left = leftleft;
+//        left.right = leftright;
+
+        right.left = rightleft;
+        right.right = rightright;
+
+        int[][] in = new int[][]{{1,2,3}, {0,2,3,4,6,8,9}, {0,1,2,4,5,7}, {-4,-2,-4,-9,10,-12,19}, {-1,-2,-3,-4,0}, {1, 7}};
+
+        System.out.println(solution.summaryRanges(in[2]));
     }
 
     static class Solution {
@@ -89,6 +109,22 @@ public class Problems_Algorithm {
         }
 
 
+
+        class NNode {
+            public int val;
+            public List<NNode> children;
+
+            public NNode() {}
+
+            public NNode(int _val) {
+                val = _val;
+            }
+
+            public NNode(int _val, List<NNode> _children) {
+                val = _val;
+                children = _children;
+            }
+        };
 //
 //        //Problem: Reverse an Integer: 123 ==> 321 , 10 ==> 01
 //        //Date: 11/10/2020
@@ -3015,7 +3051,7 @@ public class Problems_Algorithm {
 //
 //
 //        public int reverseBits(int n) {
-//            return Integer.parseInt(new StringBuilder(Integer.toBinaryString(n)).reverse().toString(),2);
+//            return Integer.reverse(n);
 //        }
 //
 //
@@ -4092,7 +4128,6 @@ public class Problems_Algorithm {
 //        }
 
 
-
 //        public int[][] insert(int[][] intervals, int[] newInterval) {
 //            int n = intervals.length;
 //            if(n == 0) return new int[][]{newInterval};
@@ -4114,9 +4149,6 @@ public class Problems_Algorithm {
 //        }
 
 
-
-
-
 //        public int findJudge(int n, int[][] trust) {
 //            int[] trustsBook = new int[n+1];
 //            for(int[] t : trust){
@@ -4131,8 +4163,6 @@ public class Problems_Algorithm {
 //        }
 
 
-
-
 //        public int arraySign(int[] nums) {
 //            boolean pos = true;
 //            for(int n:nums)
@@ -4143,8 +4173,6 @@ public class Problems_Algorithm {
 //
 //            return pos ?1:-1;
 //        }
-
-
 
 
 //        public int numberOfBeams(String[] bank) {
@@ -4162,28 +4190,1160 @@ public class Problems_Algorithm {
 //        }
 
 
+//        public int findMin(int[] nums) {
+//            if(nums[0] < nums[nums.length-1]) return nums[0];
+//            int l=0,mid=0,r=nums.length-1;
+//            while (l <= r){
+//                mid = l + (r-l)/2;
+//                if(mid < r && nums[mid] > nums[mid+1]) return nums[mid+1];
+//                if(mid > l && nums[mid] < nums[mid-1]) return nums[mid];
+//
+//                if(r < nums.length && r > l && nums[l] == nums[mid] && nums[l] == nums[r]){
+//                    if(nums[r-1]>nums[r]) return nums[r];
+//                    r--;
+//                    if(nums[l]>nums[l+1]) return nums[l+1];
+//                    l++;
+//                }
+//                else{
+//                    if(nums[mid] < nums[l]) r = mid-1;
+//                    else l = mid+1;
+//                }
+//            }
+//            return nums[mid];
+//        }
 
-        public int findMin(int[] nums) {
-            if(nums[0] < nums[nums.length-1]) return nums[0];
-            int l=0,mid=0,r=nums.length-1;
-            while (l <= r){
-                mid = l + (r-l)/2;
-                if(mid < r && nums[mid] > nums[mid+1]) return nums[mid+1];
-                if(mid > l && nums[mid] < nums[mid-1]) return nums[mid];
 
-                if(r < nums.length && r > l && nums[l] == nums[mid] && nums[l] == nums[r]){
-                    if(nums[r-1]>nums[r]) return nums[r];
-                    r--;
-                    if(nums[l]>nums[l+1]) return nums[l+1];
-                    l++;
-                }
-                else{
-                    if(nums[mid] < nums[l]) r = mid-1;
-                    else l = mid+1;
-                }
-            }
-            return nums[mid];
-        }
+//        public boolean carPooling(int[][] trips, int capacity) {
+//            int[] road = new int[1001];
+//            for (int i = 0; i < trips.length; i++) {
+//                road[trips[i][1]] += trips[i][0];
+//                road[trips[i][2]] -= trips[i][0];
+//            }
+//            int passengerCounter = 0;
+//            for(int n:road){
+//                passengerCounter+=n;
+//                if(passengerCounter > capacity) return false;
+//            }
+//            return true;
+//        }
+
+
+//        public boolean isLongPressedName(String name, String typed) {
+//            if(typed.length()<name.length()) return false;
+//            int namePointer = 0,typedPointer=0;
+//            char ch;
+//            int seenInName, seenInTyped;
+//            while (true){
+//                seenInName = 0; seenInTyped = 0;
+//                ch = name.charAt(namePointer);
+//                while (namePointer < name.length() && name.charAt(namePointer) == ch){
+//                    namePointer++;
+//                    seenInName++;
+//                }
+//
+//                while (typedPointer < typed.length() && typed.charAt(typedPointer) == ch){
+//                    typedPointer++;
+//                    seenInTyped++;
+//                }
+//                if(seenInTyped < seenInName) return false;
+//                if(namePointer >= name.length() || typedPointer >= typed.length()) {
+//                    if(namePointer >= name.length() && typedPointer >= typed.length()) return true;
+//                    else return false;
+//                }
+//            }
+//
+//        }
+
+
+//        public int heightChecker(int[] heights) {
+//            int[] sorted = heights.clone();
+//            Arrays.sort(sorted);
+//            int res = 0;
+//            for (int i = 0; i < sorted.length; i++) {
+//                if(sorted[i] != heights[i]) res++;
+//            }
+//            return res;
+//        }
+
+
+//        public boolean checkRecord(String s) {
+//            int n = s.length();
+//            int absent = 0,late = 0;
+//            char ch;
+//            boolean continuous = false;
+//            for (int i = 0; i < n; i++) {
+//                ch = s.charAt(i);
+//                if(ch=='A') {
+//                    absent++;
+//                    if (absent > 1) return false;
+//                    late = 0;
+//                }
+//                else if(ch == 'L'){
+//                    late++;
+//                    if(late > 3) return false;
+//                }
+//                else late = 0;
+//            }
+//            return true;
+//        }
+
+
+//        public int networkDelayTime(int[][] times, int n, int k) {
+//            boolean[] visited = new boolean[n+1];
+//            int[] maxTimes = new int[n+1];
+//            int[] time = new int[1];
+//            HashMap<Integer,ArrayList<Integer>> map = new HashMap<>();
+//            for(int[] ary:times){
+//                ArrayList temp = map.getOrDefault(ary[0],new ArrayList<>());
+//                temp.add(ary[1]);
+//
+//                if(!map.containsKey(ary[0]))
+//                    map.put(ary[0],temp);
+//
+//                if(maxTimes[ary[0]]<ary[2]) maxTimes[ary[0]] = ary[2];
+//            }
+//            networkDelayTime_helper(map,maxTimes,visited,time,k);
+//            for(int i=1;i<visited.length;i++){
+//                if(!visited[i]) return -1;
+//            }
+//            return time[0];
+//        }
+//        private void networkDelayTime_helper(HashMap<Integer,ArrayList<Integer>> map, int[] maxTimes, boolean[] visisted, int[] time, int currentNodeId){
+//            if(visisted[currentNodeId]) return;
+//            visisted[currentNodeId] = true;
+//
+//            if(!map.containsKey(currentNodeId)) return;
+//
+//            ArrayList<Integer> list = map.get(currentNodeId);
+//            if(list.size() == 0) return;
+//
+//            int tempMax = 0;
+//            for(int n:list){
+//                if(!visisted[n]) {
+//                    tempMax = Math.max(tempMax,maxTimes[currentNodeId]);
+//                    networkDelayTime_helper(map, maxTimes, visisted, time, n);
+//                }
+//            }
+//            time[0] += tempMax;
+//        }
+
+
+//        public int maxDistance(int[] position, int m) {
+//            Arrays.sort(position);
+//            int l = 1, r = position[position.length - 1] - position[0];
+//            m -= 1;
+//            int mid;
+//            int lastValid = -1;
+//            while (l <= r) {
+//                mid = l + (r - l) / 2;
+//                if (check(position, mid, m)) {
+//                    l = mid + 1;
+//                    lastValid = mid;
+//                } else r = mid - 1;
+//            }
+//            return lastValid;
+//        }
+//
+//        private boolean check(int[] position, int mid, int m) {
+//            int lastPosition = position[0];
+//            for (int i = 1; i < position.length; i++) {
+//                if (position[i] - lastPosition >= mid) {
+//                    m--;
+//                    lastPosition = position[i];
+//                    if (m == 0) {
+//                        return true;
+//                    }
+//                }
+//            }
+//            return false;
+//        }
+//
+//
+//        public int minDays(int[] bloomDay, int m, int k) {
+//            if (m * k > bloomDay.length) return -1;
+//            int l = 1, r = (int) 1e9;
+//            int mid, lastValid = -1;
+//            while (l <= r) {
+//                mid = l + (r - l) / 2;
+//                if (check_minDays(bloomDay, m, k, mid)) {
+//                    r = mid - 1;
+//                    lastValid = mid;
+//                } else l = mid + 1;
+//            }
+//            return lastValid;
+//        }
+//
+//        private boolean check_minDays(int[] bloomDay, int m, int k, int d) {
+//            int counterContinuous = 0, counterBouquet = 0;
+//            for (int i = 0; i < bloomDay.length; i++) {
+//                if (bloomDay[i] <= d) {
+//                    if (++counterContinuous == k) {
+//                        if (++counterBouquet == m) return true;
+//                        counterContinuous = 0;
+//                    }
+//                } else counterContinuous = 0;
+//            }
+//            return false;
+//        }
+//
+//
+//        public String licenseKeyFormatting(String s, int k) {
+//            Stack<Character> stack = new Stack<>();
+//            for (char c : s.toCharArray()) {
+//                if (c != '-')
+//                    stack.push(Character.toUpperCase(c));
+//            }
+//            int numOfDashes = (int) (Math.ceil(stack.size() * 1.0f / k * 1.0f) - 1);
+//            ArrayList<Character> ress = new ArrayList<>();
+//            int groupCharCounter = 0;
+//            while (!stack.isEmpty()) {
+//                if (groupCharCounter++ == k) {
+//                    ress.add('-');
+//                    groupCharCounter = 0;
+//                } else ress.add(stack.pop());
+//            }
+//            Collections.reverse(ress);
+//            char[] res = new char[ress.size()];
+//            for (int i = 0; i < res.length; i++) {
+//                res[i] = ress.get(i);
+//            }
+//            return String.valueOf(res);
+//        }
+//
+//
+//        public int shipWithinDays(int[] weights, int days) {
+//            int l = 1, r = 0;
+//            for (int weight : weights) {
+//                if (weight > l) l = weight;
+//                r += weight;
+//            }
+//            int lastValid = -1;
+//            int mid;
+//            while (l <= r) {
+//                mid = l + (r - l) / 2;
+//                if (check_shipWithinDays(weights, days, mid)) {
+//                    r = mid - 1;
+//                    lastValid = mid;
+//                } else l = mid + 1;
+//            }
+//            return lastValid;
+//        }
+//
+//        private boolean check_shipWithinDays(int[] weights, int days, int capacity) {
+//            int temp = 0;
+//            for (int i = 0; i < weights.length; i++) {
+//                if (temp + weights[i] > capacity) {
+//                    temp = weights[i];
+//                    days--;
+////                    if(--days < 1) {
+////                        return false;
+////                    }
+//                } else temp += weights[i];
+//            }
+//            return days >= 0;
+//        }
+//
+//
+//        public TreeNode insertIntoBST(TreeNode root, int val) {
+//            if (root == null) return new TreeNode(val);
+//            TreeNode current = root;
+//            TreeNode parentCurrent = null;
+//            boolean isRight = false;
+//            while (current != null) {
+//                parentCurrent = current;
+//                if (val > current.val) {
+//                    current = current.right;
+//                    isRight = true;
+//                } else {
+//                    current = current.left;
+//                    isRight = false;
+//                }
+//            }
+//            if (isRight)
+//                parentCurrent.right = new TreeNode(val);
+//            else
+//                parentCurrent.left = new TreeNode(val);
+//            return root;
+//        }
+//
+//
+//        public int findMinArrowShots(int[][] points) {
+//            Arrays.sort(points, Comparator.comparingInt(a -> a[1]));
+//            int lastEnd = points[0][1];
+//            int res = 1;
+//            for (int i = 1; i < points.length; i++) {
+//                if (!(lastEnd >= points[i][0] && lastEnd <= points[i][1])) {
+//                    lastEnd = points[i][1];
+//                    res++;
+//                }
+//            }
+//            return res;
+//        }
+//
+//
+//        public String getHint(String secret, String guess) {
+//            int[] map = new int[10];
+//            int[] guessMap = new int[10];
+//            long bulls = 0, cows = 0;
+//            char tempSecret, tempGuess;
+//            for (int i = 0; i < secret.length(); i++) {
+//                tempGuess = guess.charAt(i);
+//                tempSecret = secret.charAt(i);
+//                if (tempGuess == tempSecret) bulls++;
+//                else {
+//                    map[tempSecret - 48]++;
+//                    guessMap[tempGuess - 48]++;
+//                }
+//            }
+//            for (int i = 0; i < map.length; i++)
+//                if (map[i] > 0 && guessMap[i] > 0) cows += Math.min(map[i], guessMap[i]);
+//
+//            return bulls + "A" + cows + "B";
+//        }
+//
+//
+//        public int numPairsDivisibleBy60(int[] time) {
+//            int[] map = new int[60];
+//            int res = 0;
+//            for (int song : time) {
+//                res += map[(60 - song % 60) % 60];
+//                map[song % 60]++;
+//            }
+//            return res;
+//        }
+//
+//
+//        public int maxDistToClosest(int[] seats) {
+//            int res = 0, tempRes = 0, left = 0, right = 0;
+//            boolean fromLeft = true, fromRight = true;
+//            for (int i = 0; i < seats.length; i++) {
+//                if (seats[i] == 0) {
+//                    tempRes++;
+//                    res = Math.max(res, (tempRes + 1) / 2);
+//                } else tempRes = 0;
+//                if (fromLeft) {
+//                    if (seats[i] == 1) fromLeft = false;
+//                    else left++;
+//                }
+//                if (fromRight) {
+//                    if (seats[seats.length - 1 - i] == 1) fromRight = false;
+//                    else right++;
+//                }
+//            }
+//            return Math.max(res, Math.max(left, right));
+//        }
+//
+//
+//        public int romanToInt(String s) {
+//            Map<Character, Integer> map = new HashMap<>();
+//            map.put('I', 1);
+//            map.put('V', 5);
+//            map.put('X', 10);
+//            map.put('L', 50);
+//            map.put('C', 100);
+//            map.put('D', 500);
+//            map.put('M', 1000);
+//            int res = map.get(s.charAt(s.length() - 1));
+//            for (int i = s.length() - 2; i >= 0; i--) {
+//                if (map.get(s.charAt(i)) < map.get(s.charAt(i + 1)))
+//                    res -= map.get(s.charAt(i));
+//                else res += map.get(s.charAt(i));
+//            }
+//            return res;
+//        }
+//
+//
+//        // This is the interface that allows for creating nested lists.
+//        // You should not implement it, or speculate about its implementation
+//        public interface NestedInteger {
+//
+//            // @return true if this NestedInteger holds a single integer, rather than a nested list.
+//            public boolean isInteger();
+//
+//            // @return the single integer that this NestedInteger holds, if it holds a single integer
+//            // Return null if this NestedInteger holds a nested list
+//            public Integer getInteger();
+//
+//            // @return the nested list that this NestedInteger holds, if it holds a nested list
+//            // Return empty list if this NestedInteger holds a single integer
+//            public List<NestedInteger> getList();
+//        }
+//
+//        public class NestedIterator implements Iterator<Integer> {
+//            Stack<ListIterator<NestedInteger>> elements;
+//            private NestedInteger temp;
+//
+//            public NestedIterator(List<NestedInteger> nestedList) {
+//                elements = new Stack<>();
+//                elements.push(nestedList.listIterator());
+//            }
+//
+//            @Override
+//            public Integer next() {
+//                hasNext();
+//                return elements.peek().next().getInteger();
+//            }
+//
+//            @Override
+//            public boolean hasNext() {
+//                while (!elements.isEmpty()) {
+//                    if (!elements.peek().hasNext()) elements.pop();
+//                    else {
+//                        temp = elements.peek().next();
+//                        if (temp.isInteger()) {
+//                            elements.peek().previous();
+//                            return true;
+//                        }
+//                        elements.push(temp.getList().listIterator());
+//                    }
+//                }
+//                return false;
+//            }
+//        }
+//
+//
+//        public ListNode detectCycle(ListNode head) {
+//            try {
+//                ListNode slow = head.next, fast = head.next.next;
+//                while (slow != fast) {
+//                    slow = slow.next;
+//                    fast = fast.next.next;
+//                }
+//                slow = head;
+//                while (slow != fast) {
+//                    slow = slow.next;
+//                    fast = fast.next;
+//                }
+//                return slow;
+//            } catch (NullPointerException e) {
+//                return null;
+//            }
+//        }
+//
+//
+//        public int[] relativeSortArray(int[] arr1, int[] arr2) {
+//            HashMap<Integer, Integer> map = new HashMap<>();
+//            for (int n : arr1) map.put(n, map.getOrDefault(n, 0) + 1);
+//            int pointer = 0;
+//            for (int i = 0; i < arr2.length; i++) {
+//                int c = map.get(arr2[i]);
+//                for (int j = 0; j < c; j++) {
+//                    arr1[pointer++] = arr2[i];
+//                }
+//                map.remove(arr2[i]);
+//            }
+//            int secindPointer = 0;
+//            int[] temp = new int[arr1.length - pointer];
+//            for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+//                int v = entry.getValue();
+//                for (int i = 0; i < v; i++) {
+//                    temp[secindPointer++] = entry.getKey();
+//                }
+//            }
+//            Arrays.sort(temp);
+//            for (int i = 0; i < temp.length; i++) {
+//                arr1[pointer++] = temp[i];
+//            }
+//            return arr1;
+//        }
+//
+//
+//        public List<Integer> sequentialDigits(int low, int high) {
+//            int start = 1, cur = 1, inc = 11, t = 8;
+//            List<Integer> res = new ArrayList<>();
+//            while (cur <= high) {
+//                for (int i = 0; i < t; i++) {
+//                    cur += inc;
+//                    if (cur >= low && cur <= high) res.add(cur);
+//                    else if (cur > high) return res;
+//                }
+//                inc = 10 * inc + 1;
+//                start = 10 * start + 10 - (t--);
+//                cur = start;
+//            }
+//            return res;
+//        }
+//
+//
+//        public int consecutiveNumbersSum(int n) {
+//            int res = 1;
+//            for (int i = 2; i <= Math.sqrt(2 * n); i++) {
+//                if ((n - (i * (i + 1) / 2)) % i == 0) res++;
+//            }
+//            return res;
+//        }
+//
+//
+//        public int[] getNoZeroIntegers(int n) {
+//            int a = 0, b = 0, step = 1, temp;
+//            while (n > 0) {
+//                temp = n % 10;
+//                n /= 10;
+//                if ((temp == 0 || temp == 1) && n > 0) {
+//                    a += step * ++temp;
+//                    b += step * 9;
+//                    n--;
+//                } else {
+//                    a += step;
+//                    b += step * --temp;
+//                }
+//                step *= 10;
+//            }
+//            return new int[]{a, b};
+//        }
+//
+//
+//        public String toHex(int num) {
+//            if (num == 0) return "0";
+//            char[] map = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
+//            StringBuilder sb = new StringBuilder();
+//            while (num != 0) {
+//                sb.insert(0, map[(num & 15)]);
+//                num = num >> 4;
+//            }
+//            return sb.toString();
+//        }
+//
+//
+//        class MyHashMap {
+//            int[] map;
+//            boolean[] exist;
+//
+//            public MyHashMap() {
+//                map = new int[1000001];
+//                exist = new boolean[1000001];
+//            }
+//
+//            public void put(int key, int value) {
+//                map[key] = value;
+//                exist[key] = true;
+//            }
+//
+//            public int get(int key) {
+//                return exist[key] ? map[key] : -1;
+//            }
+//
+//            public void remove(int key) {
+//                exist[key] = false;
+//            }
+//        }
+//
+//
+//        public List<Integer> inorderTraversal(TreeNode root) {
+//            List<Integer> res = new LinkedList<>();
+//            helper_inorderTraversal(res, root);
+//            return res;
+//        }
+//
+//        private void helper_inorderTraversal(List<Integer> res, TreeNode root) {
+//            if (root == null) return;
+//            helper_inorderTraversal(res, root.left);
+//            res.add(root.val);
+//            helper_inorderTraversal(res, root.right);
+//        }
+//
+//
+//        public boolean detectCapitalUse(String word) {
+//            boolean allCapitals = true, onlyFirstCapital = true, allSmall = true;
+//            onlyFirstCapital = Character.isUpperCase(word.charAt(0));
+//            for (int i = 1; i < word.length(); i++) {
+//                if (Character.isUpperCase(word.charAt(i))) allSmall = false;
+//                else allCapitals = false;
+//            }
+//            return (allCapitals && onlyFirstCapital) || (allSmall);
+//        }
+//
+//
+//        public boolean validMountainArray(int[] arr) {
+//            if (arr.length < 3) return false;
+//            boolean peak = false;
+//            if (arr[0] >= arr[1] || arr[arr.length - 1] >= arr[arr.length - 2]) return false;
+//            for (int i = 1; i < arr.length - 1; i++) {
+//                if (arr[i] >= arr[i - 1] && peak) return false;
+//                if (arr[i] <= arr[i - 1] && !peak) return false;
+//                if (arr[i] > arr[i + 1]) peak = true;
+//            }
+//            return peak;
+//        }
+//
+//
+//        public List<Integer> getAllElements(TreeNode root1, TreeNode root2) {
+//            List<Integer> res = new ArrayList<>();
+//            Queue<TreeNode> q = new LinkedList<>();
+//            if (root1 != null) q.add(root1);
+//            if (root2 != null) q.add(root2);
+//            TreeNode temp;
+//            while (!q.isEmpty()) {
+//                temp = q.poll();
+//                res.add(temp.val);
+//                if (temp.left != null) q.add(temp.left);
+//                if (temp.right != null) q.add(temp.right);
+//            }
+//            Collections.sort(res);
+//            return res;
+//        }
+//
+//
+//        static class TrieNode {
+//            char value;
+//            TrieNode parent;
+//            TrieNode[] children = new TrieNode[26];
+//            boolean endOfWord = false;
+//
+//            public TrieNode(TrieNode p, TrieNode[] children, char value) {
+//                this.parent = p;
+//                this.children = children.clone();
+//                this.value = value;
+//            }
+//
+//            public TrieNode(TrieNode p, char value) {
+//                this.parent = p;
+//                this.value = value;
+//            }
+//        }
+//
+//        public static class Trie {
+//            TrieNode root;
+//
+//            public Trie() {
+//                root = new TrieNode(null, 'r');
+//            }
+//
+//            public void insert(String word) {
+//                TrieNode temp = root;
+//                char tempCh;
+//                for (int i = 0; i < word.length(); i++) {
+//                    tempCh = word.charAt(i);
+//                    TrieNode[] tempTrieNodes = new TrieNode[26];
+//                    if (temp.children[tempCh - 'a'] == null)
+//                        temp.children[tempCh - 'a'] = new TrieNode(temp, tempTrieNodes, tempCh);
+//                    temp = temp.children[tempCh - 'a'];
+//                }
+//                temp.endOfWord = true;
+//            }
+//
+//            public boolean search(String word) {
+//                TrieNode temp = root;
+//                char tempCh;
+//                for (int i = 0; i < word.length(); i++) {
+//                    tempCh = word.charAt(i);
+//                    if (temp.children[tempCh - 'a'] != null) temp = temp.children[tempCh - 'a'];
+//                    else return false;
+//                }
+//                return temp.endOfWord;
+//            }
+//
+//            public boolean startsWith(String prefix) {
+//                TrieNode temp = root;
+//                char tempCh;
+//                for (int i = 0; i < prefix.length(); i++) {
+//                    tempCh = prefix.charAt(i);
+//                    if (temp.children[tempCh - 'a'] != null) temp = temp.children[tempCh - 'a'];
+//                    else return false;
+//                }
+//                if (temp.endOfWord) return true;
+//                for (int i = 0; i < temp.children.length; i++) {
+//                    if (temp.children[i] != null) return true;
+//                }
+//                return false;
+//            }
+//        }
+//
+//
+//
+//
+//        public int numWaterBottles(int numBottles, int numExchange) {
+//            int res = numBottles;
+//            int emptyBottels = numBottles;
+//            int fullBottels = 0;
+//            while (emptyBottels >= numExchange){
+//                fullBottels = emptyBottels / numExchange;
+//                emptyBottels = fullBottels + (emptyBottels % numExchange);
+//                res += fullBottels;
+//            }
+//
+//            return res;
+//        }
+//
+//
+//        public int minSteps(String s, String t) {
+//            int[] sChars = new int[26];
+//            int[] tChars = new int[26];
+//            for(char ch : s.toCharArray()) sChars[ch-'a']++;
+//            for(char ch : t.toCharArray()) tChars[ch-'a']++;
+//
+//            int res = 0;
+//            for (int i = 0; i < tChars.length; i++) {
+//                res += Math.abs(sChars[i] - tChars[i]);
+//            }
+//            return res / 2;
+//        }
+//
+//
+//        public int[] productExceptSelf(int[] nums) {
+//            int fromBegin = 1, fromLast = 1,numOfZeros = 0;
+//            int[] res = new int[nums.length];
+//            Arrays.fill(res,1);
+//            for (int i = 0; i < nums.length; i++) {
+//                if(nums[i] == 0) numOfZeros++;
+//                if(numOfZeros > 1){
+//                    Arrays.fill(res,0);
+//                    return res;
+//                }
+//                res[i] *= fromBegin;
+//                fromBegin *= nums[i];
+//                res[nums.length-i-1] *= fromLast;
+//                fromLast *= nums[nums.length-i-1];
+//            }
+//            return res;
+//        }
+//
+//
+//
+//        public int maxSubArray(int[] nums) {
+//            int max = nums[0], tempMax = nums[0];
+//            for (int i = 1; i < nums.length; i++) {
+//                if(nums[i] + tempMax > nums[i]) tempMax+=nums[i];
+//                else tempMax = nums[i];
+//                max = Math.max(max,tempMax);
+//            }
+//            return max;
+//        }
+//
+//
+//
+//        public int findShortestSubArray(int[] nums) {
+//            HashMap<Integer,Integer> firstSeen = new HashMap<>(),lastSeen = new HashMap<>(),map = new HashMap<>();
+//            for (int i = 0; i < nums.length; i++) {
+//                lastSeen.put(nums[i],i);
+//                map.put(nums[i],map.getOrDefault(nums[i],0)+1);
+//            }
+//            for (int i = nums.length - 1; i >= 0; i--) firstSeen.put(nums[i],i);
+//
+//            ArrayList<Integer> mostCommonKeys = new ArrayList<>();
+//            int mostCommonKeyValue = 0;
+//            for(Map.Entry<Integer,Integer> entry : map.entrySet()){
+//                int key = entry.getKey();
+//                if(map.get(key) > mostCommonKeyValue){
+//                    mostCommonKeyValue = entry.getValue();
+//                    mostCommonKeys = new ArrayList<>();
+//                    mostCommonKeys.add(key);
+//                }
+//                else if(map.get(key) == mostCommonKeyValue)  mostCommonKeys.add(key);
+//            }
+//            int res = Integer.MAX_VALUE;
+//            for(int n : mostCommonKeys) res = Math.min(res,lastSeen.get(n) - firstSeen.get(n) + 1);
+//
+//            return res;
+//        }
+//
+//
+//
+//
+//        public boolean isSameTree(TreeNode p, TreeNode q) {
+//            Queue<TreeNode> q1 = new LinkedList<>(), q2 = new LinkedList<>();
+//            if(p == null || q == null){
+//                if(p != null || q != null) return false;
+//                return true;
+//            }
+//            q1.add(p);
+//            q2.add(q);
+//            while (!q1.isEmpty() || !q2.isEmpty()) {
+//                TreeNode temp1 = q1.poll();
+//                TreeNode temp2 = q2.poll();
+//                if(temp1.val != temp2.val) return false;
+//                if(temp1.left!=null) q1.add(temp1.left);
+//                if(temp2.left != null) q2.add(temp2.left);
+//                if(q1.size() != q2.size()) return false;
+//                if(temp1.right!=null) q1.add(temp1.right);
+//                if(temp2.right != null) q2.add(temp2.right);
+//                if(q1.size() != q2.size()) return false;
+//            }
+//            return true;
+//        }
+//
+//
+//
+//
+//        public boolean isValidBST(TreeNode root) {
+//            return helper_isValidBST(root,(long)Integer.MIN_VALUE-1,(long)Integer.MAX_VALUE+1);
+//        }
+//        private boolean helper_isValidBST(TreeNode root, long min, long max){
+//            if(root == null) return true;
+//            if(root.val <= min || root.val >= max) return false;
+//            return helper_isValidBST(root.left,min,root.val) && helper_isValidBST(root.right,root.val,max);
+//        }
+//
+//
+//
+//        public String replaceWords(List<String> dictionary, String sentence) {
+//            HashSet<String> set = new HashSet<>();
+//            for (String s : dictionary) set.add(s);
+//
+//            String[] words = sentence.split(" ");
+//            StringBuilder sb = new StringBuilder();
+//            outerloop: for (int i = 0; i < words.length; i++) {
+//                String word = "";
+//                for (int j = 0; j < words[i].length(); j++) {
+//                    word += String.valueOf(words[i].charAt(j));
+//                    if(set.contains(word)) {
+//                        sb.append(word + " ");
+//                        continue outerloop;
+//                    }
+//                }
+//                sb.append(word+" ");
+//            }
+//            sb.deleteCharAt(sb.length()-1);
+//            return sb.toString();
+//
+//        }
+//
+//
+//
+//        public void sortColors(int[] nums) {
+//            int numberOfReds = 0, numberOfBlues = 0, numberOfWhites = 0;
+//            for(int n : nums){
+//                switch (n){
+//                    case 0: numberOfReds++; break;
+//                    case 1: numberOfWhites++; break;
+//                    case 2: numberOfBlues++; break;
+//                }
+//            }
+//            Arrays.fill(nums,0,numberOfReds,0);
+//            Arrays.fill(nums,numberOfReds,numberOfReds + numberOfWhites,1);
+//            Arrays.fill(nums,numberOfReds + numberOfWhites,nums.length,2);
+//        }
+//
+//
+//
+//
+//        public String removeKdigits(String num, int k) {
+//            if(k == num.length()) return "0";
+//            Stack<Character> stack = new Stack<>();
+//            for (int i = 0; i < num.length(); i++) {
+//                while (k > 0 && !stack.isEmpty() && stack.peek() > num.charAt(i)){
+//                    stack.pop();
+//                    k--;
+//                }
+//                stack.push(num.charAt(i));
+//            }
+//
+//            while (k>0){
+//                stack.pop();
+//                k--;
+//            }
+//
+//            StringBuilder sb = new StringBuilder();
+//            while (!stack.isEmpty()) sb.append(stack.pop());
+//            sb.reverse();
+//            while (sb.length() > 1 && sb.charAt(0)=='0') sb.deleteCharAt(0);
+//            return sb.toString();
+//        }
+//
+//
+//
+//
+//        public List<List<Integer>> threeSum(int[] nums) {
+//            Set<List<Integer>> res = new HashSet<>();
+//            Arrays.sort(nums);
+//            for (int i = 0; i < nums.length-2; i++) {
+//                int j = i+1,k = nums.length-1;
+//                while (j < k){
+//                    int sum = nums[i] + nums[j] + nums[k];
+//                    if( sum == 0) {
+//                        List<Integer> temp = new ArrayList<>();
+//                        temp.add(nums[i]); temp.add(nums[j]); temp.add(nums[k]);
+//                        res.add(temp);
+//                    }
+//                    else if(sum > 0) k--;
+//                    else j++;
+//                }
+//            }
+//
+//            return new ArrayList<>(res);
+//        }
+//
+//
+//
+//
+//        public List<String> letterCombinations(String digits) {
+//            Map<Integer,String> map = new HashMap<>();
+//            map.put(2,"abc");
+//            map.put(3,"def");
+//            map.put(4,"ghi");
+//            map.put(5,"jkl");
+//            map.put(6,"mno");
+//            map.put(7,"pqrs");
+//            map.put(8,"tuv");
+//            map.put(9,"wxyz");
+//
+//            if(digits.length()==0) return new ArrayList<>();
+//
+//            List<String> list = new ArrayList<>();
+//            String t = map.get(digits.charAt(0)-'0');
+//            for (int i = 0; i < t.length(); i++) {
+//                list.add(String.valueOf(t.charAt(i)));
+//            }
+//
+//            if(digits.length()==1) return list;
+//
+//            for (int i = 1; i < digits.length(); i++) {
+//                List<String> original = new ArrayList<>();
+//                helper_letterCombinations(original,list,map.get(digits.charAt(i)-'0'));
+//                list = original;
+//            }
+//            return list;
+//        }
+//        private void helper_letterCombinations(List<String> original, List<String> list, String b){
+//            int size = list.size();
+//            for (int i = 0; i < b.length(); i++) {
+//                for (int j = 0; j < size; j++) {
+//                    original.add(list.get(j) + b.charAt(i));
+//                }
+//            }
+//
+//        }
+//
+//
+//
+//
+//        public int hammingWeight(int n) {
+//            int res = 0;
+//            while (n != 0){
+//                if((n&1) == 1) res++;
+//                n = n >>> 1;
+//            }
+//            return res;
+//        }
+//
+//
+//
+//
+//        public int hammingDistance(int x, int y) {
+//            return Integer.bitCount(x ^ y);
+//        }
+//
+//
+//
+//        public int totalHammingDistance(int[] nums) {
+//            int numOfElementsHaveThatBitOn, res = 0;
+//            for (int i = 0; i < 32; i++) {
+//                numOfElementsHaveThatBitOn = 0;
+//                for (int j = 0; j < nums.length; j++) {
+//                    numOfElementsHaveThatBitOn += (nums[j] >> i) & 1;
+//                }
+//                res += numOfElementsHaveThatBitOn * (nums.length - numOfElementsHaveThatBitOn);
+//            }
+//            return res;
+//        }
+//
+//
+//
+//        //Unsolved
+//        public int findMaxLength(int[] nums) {
+//            HashMap<Integer,Integer> map = new HashMap<>();
+//            map.put(0,-1);
+//            int max = 0, count = 0;
+//            for (int i = 0; i < nums.length; i++) {
+//                count += (nums[i]==0?-1:1);
+//                if(map.containsKey(count))
+//                    max = Math.max(max,i - map.get(count));
+//                else
+//                    map.put(count,i);
+//            }
+//            return max;
+//        }
+//
+//
+//
+//
+//        public int addDigits(int num) {
+//           if(num == 0) return 0;
+//            return 1 + ((num-1)%9);
+//        }
+//
+//
+//
+//
+//        public int findPairs(int[] nums, int k) {
+//            Set<Integer> set = new HashSet<>();
+//            Set<Long> pairs = new HashSet<>();
+//            int res = 0;
+//            Arrays.sort(nums);
+////            if(Arrays.binarySearch(nums,))
+//            for(int n : nums){
+//                if(set.contains(n-k)) {
+//                    long temp = n-k;
+//                    temp = temp << 32;
+//                    temp|=n;
+//                    if(!pairs.contains(temp)) res++;
+//                    pairs.add(temp);
+//                }
+//                set.add(n);
+//
+//            }
+//            return res;
+//        }
+//
+//
+//
+//
+//        public int nthUglyNumber(int n, int a, int b, int c) {
+//            int left = 0, right = (int) 2e9, result = 0;
+//            while (left <= right) {
+//                int mid = left + (right - left) / 2;
+//                if (count(mid, a, b, c) >= n) {
+//                    result = mid;
+//                    right = mid - 1;
+//                } else {
+//                    left = mid + 1;
+//                }
+//            }
+//            return result;
+//        }
+//        private int count(long num, long a, long b, long c) {
+//            return (int) (num / a + num / b + num / c
+//                    - num / lcm(a, b)
+//                    - num / lcm(b, c)
+//                    - num / lcm(a, c)
+//                    + num / (lcm(a, lcm(b, c))));
+//        }
+//        private long gcd(long a, long b) {
+//            if (a == 0) return b;
+//            return gcd(b % a, a);
+//        }
+//        private long lcm(long a, long b) {
+//            return a * b / gcd(a, b);
+//        }
+//
+//
+//
+//
+//
+//        public int ladderLength(String beginWord, String endWord, List<String> wordList) {
+//            HashSet<String> set = new HashSet<>(wordList);
+//            if(!set.contains(endWord)) return 0;
+//
+//            Set<String> reached = new HashSet<>(), toAdd;
+//            int steps = 1;
+//            reached.add(beginWord);
+//            while (!reached.contains(endWord)){
+//                toAdd = new HashSet<>();
+//                for(String str : reached){
+//                    char[] strArray = str.toCharArray();
+//                    for (int i = 0; i < strArray.length; i++) {
+//                        char tempCh = strArray[i];
+//                        for(char ch = 'a';ch<='z';ch++){
+//                            strArray[i] = ch;
+//                            String temp = new String(strArray);
+//                            if(set.contains(temp)) {
+//                                toAdd.add(temp);
+//                                set.remove(temp);
+//                            }
+//
+//                        }
+//                        strArray[i] = tempCh;
+//                    }
+//                }
+//                if(toAdd.size() == 0) return 0;
+//                reached = toAdd;
+//                steps++;
+//            }
+//            return steps;
+//        }
+//
+//
+//
+//
+//
+//        public int minMutation(String start, String end, String[] bank) {
+//            Set<String> set = new HashSet<>();
+//            for(String s : bank) set.add(s);
+//            if(!set.contains(end)) return -1;
+//
+//            char[] letters = {'T','C','G','A'};
+//            int steps = 1;
+//            Set<String> reached = new HashSet<>(),toAdd;
+//            reached.add(start);
+//            while(!reached.contains(end)){
+//                toAdd = new HashSet<>();
+//                for(String str : reached){
+//                    char[] tempAry = str.toCharArray();
+//                    for (int i = 0; i < 8; i++) {
+//                        char tempCh = tempAry[i];
+//                        for(char ch : letters){
+//                            tempAry[i] = ch;
+//                            String tempStr = new String(tempAry);
+//                            if(set.contains(tempStr)){
+//                                toAdd.add(tempStr);
+//                                set.remove(tempStr);
+//                            }
+//                        }
+//                        tempAry[i] = tempCh;
+//                    }
+//                }
+//                if(toAdd.size() == 0)return -1;
+//                reached = toAdd;
+//                steps++;
+//            }
+//            return steps;
+//        }
+//
+//
+//
+//
+//        public List<List<Integer>> subsets(int[] nums) {
+//            List<List<Integer>> res = new ArrayList<>();
+//            ArrayList<Integer> ary;
+//            for (int i = 0; i < Math.pow(2,nums.length); i++) {
+//                String bitmask = String.format("%"+nums.length+"s",Integer.toBinaryString(i)).replace(" ","0");
+//                ary = new ArrayList<>();
+//                for (int j = 0; j < nums.length; j++) {
+//                    if(bitmask.charAt(j)=='1') ary.add(nums[j]);
+//                }
+//                res.add(ary);
+//            }
+//            return res;
+//        }
+//
+//
+//
+//
+//        public int maxDepth(NNode root) {
+//            if (root == null) { return 0; }
+//
+//            int maxDepth = 0;
+//            Queue<NNode> q = new LinkedList<>();
+//            q.add(root);
+//            while (!q.isEmpty()) {
+//                int nodeInThisLevel = q.size();
+//                while (nodeInThisLevel-- > 0) {
+//                    NNode temp = q.poll();
+//                    for(NNode n : temp.children ) q.add(n);
+//                }
+//                maxDepth++;
+//            }
+//            return maxDepth;
+//        }
+//
+//
+//
+//
+//        public List<String> summaryRanges(int[] nums) {
+//            List<String> res = new LinkedList<>();
+//            int j;
+//            for (int i = 0; i < nums.length; i++) {
+//                int first = nums[i];
+//                int last = nums[i];
+//                for (j = i+1; j < nums.length; j++,i++) {
+//                    if(nums[j] != last+1) break;
+//                    else last = nums[j];
+//                }
+//                if(first == last) res.add(String.valueOf(first));
+//                else res.add(first+"->"+last);
+//            }
+//            return res;
+//        }
     }
 }
 
