@@ -66,7 +66,7 @@ public class Problems_Algorithm {
         "mkgfzkkuxownxvfvxasy"
 [505870226,437526072,266740649,224336793,532917782,311122363,567754492,595798950,81520022,684110326,137742843,275267355,856903962,148291585,919054234,467541837,622939912,116899933,983296461,536563513]
          */
-        System.out.println(solution.longestPalindrome("civilwartestingwhetherthatnaptionoranynartionsoconceivedandsodedicatedcanlongendureWeareqmetonagreatbattlefiemldoftzhatwarWehavecometodedicpateaportionofthatfieldasafinalrestingplaceforthosewhoheregavetheirlivesthatthatnationmightliveItisaltogetherfangandproperthatweshoulddothisButinalargersensewecannotdedicatewecannotconsecratewecannothallowthisgroundThebravelmenlivinganddeadwhostruggledherehaveconsecrateditfaraboveourpoorponwertoaddordetractTgheworldadswfilllittlenotlenorlongrememberwhatwesayherebutitcanneverforgetwhattheydidhereItisforusthelivingrathertobededicatedheretotheulnfinishedworkwhichtheywhofoughtherehavethusfarsonoblyadvancedItisratherforustobeherededicatedtothegreattdafskremainingbeforeusthatfromthesehonoreddeadwetakeincreaseddevotiontothatcauseforwhichtheygavethelastpfullmeasureofdevotionthatweherehighlyresolvethatthesedeadshallnothavediedinvainthatthisnationunsderGodshallhaveanewbirthoffreedomandthatgovernmentofthepeoplebythepeopleforthepeopleshallnotperishfromtheearth"));
+        System.out.println(solution.numMatchingSubseq("abcde", new String[]{"a", "bb"}));
 
     }
 
@@ -5841,6 +5841,76 @@ public class Problems_Algorithm {
                 res += (x / 2) * 2;
             }
             return isOdd ? ++res : res;
+        }
+
+
+
+        public List<Integer> preorder(NNode root) {
+            List<Integer> res = new LinkedList<>();
+            preorder_helper(root,res);
+            return res;
+        }
+        private void preorder_helper(NNode node, List<Integer> list) {
+            if(node == null) return;
+            list.add(node.val);
+            for(NNode n : node.children) {
+                preorder_helper(node, list);
+            }
+        }
+
+
+
+
+        public int numIslands(char[][] grid) {
+            int counter = 0;
+            for (int i = 0; i < grid.length; i++) {
+                for (int j = 0; j < grid[0].length; j++) {
+                    if(grid[i][j] == '1')
+                        counter++;
+                        numIslands_helper(grid,i,j);
+                }
+            }
+            return counter;
+        }
+        private void numIslands_helper(char[][] grid, int x, int y) {
+            if(x < 0 || x >= grid.length || y < 0 || y >= grid[0].length) return;
+
+            if(grid[x][y] == '0') return;
+
+            grid[x][y] = '0';
+
+            numIslands_helper(grid,x+1,y);
+            numIslands_helper(grid,x-1,y);
+            numIslands_helper(grid,x,y-1);
+            numIslands_helper(grid,x,y+1);
+        }
+
+
+
+
+        public int numMatchingSubseq(String s, String[] words) {
+            int res = 0;
+            HashMap<String,Integer> map = new HashMap<>();
+            for(String str : words)
+                map.put(str,map.getOrDefault(str,0)+1);
+            for(String str : map.keySet()) { if(numMatchingSubseq_helper(str,s)) { res+=map.get(str); } }
+            return res;
+        }
+
+        private boolean numMatchingSubseq_helper(String s, String t) {
+            if(t.length() == 0){
+                if(s.length() == 0) return true;
+                else return false;
+            }
+            if(s.length() == 0) return true;
+            int pointer = 0;
+            for (int i = 0; i < t.length(); i++) {
+                if(t.charAt(i) == s.charAt(pointer)){
+                    pointer++;
+                }
+                if(pointer == s.length()) return true;
+            }
+            return pointer == s.length();
         }
     }
 }
