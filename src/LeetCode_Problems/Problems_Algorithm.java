@@ -41,7 +41,7 @@ public class Problems_Algorithm {
         right.right = rightright;
 
         int[][] in = new int[][]{{26, 9, 17}, {3, 4}};
-        String[][] strings = new String[][]{{"abcw", "baz", "foo", "bar", "xtfn", "abcdef"}, {"adsdf", "sfd"}, {"z"}};
+        String[][] strings = new String[][]{{"i","love","leetcode","i","love","coding"}, {"adsdf", "sfd"}, {"z"}};
 
 
         List<List<String>> list = new LinkedList<>();
@@ -66,7 +66,7 @@ public class Problems_Algorithm {
         "mkgfzkkuxownxvfvxasy"
 [505870226,437526072,266740649,224336793,532917782,311122363,567754492,595798950,81520022,684110326,137742843,275267355,856903962,148291585,919054234,467541837,622939912,116899933,983296461,536563513]
          */
-        System.out.println(solution.numMatchingSubseq("abcde", new String[]{"a", "bb"}));
+        System.out.println(solution.decodeString("100[leetcode]"));
 
     }
 
@@ -5829,7 +5829,7 @@ public class Problems_Algorithm {
                     capitalLetters[ch - 'A']++;
                 else
                     smallLetters[ch - 'a']++;
-                boolean isOdd = false;
+            boolean isOdd = false;
             int res = 0;
             for (int x : smallLetters) {
                 if (x % 2 == 1) isOdd = true;
@@ -5844,76 +5844,276 @@ public class Problems_Algorithm {
         }
 
 
-
         public List<Integer> preorder(NNode root) {
             List<Integer> res = new LinkedList<>();
-            preorder_helper(root,res);
+            preorder_helper(root, res);
             return res;
         }
+
         private void preorder_helper(NNode node, List<Integer> list) {
-            if(node == null) return;
+            if (node == null) return;
             list.add(node.val);
-            for(NNode n : node.children) {
+            for (NNode n : node.children) {
                 preorder_helper(node, list);
             }
         }
-
-
 
 
         public int numIslands(char[][] grid) {
             int counter = 0;
             for (int i = 0; i < grid.length; i++) {
                 for (int j = 0; j < grid[0].length; j++) {
-                    if(grid[i][j] == '1')
+                    if (grid[i][j] == '1')
                         counter++;
-                        numIslands_helper(grid,i,j);
+                    numIslands_helper(grid, i, j);
                 }
             }
             return counter;
         }
-        private void numIslands_helper(char[][] grid, int x, int y) {
-            if(x < 0 || x >= grid.length || y < 0 || y >= grid[0].length) return;
 
-            if(grid[x][y] == '0') return;
+        private void numIslands_helper(char[][] grid, int x, int y) {
+            if (x < 0 || x >= grid.length || y < 0 || y >= grid[0].length) return;
+
+            if (grid[x][y] == '0') return;
 
             grid[x][y] = '0';
 
-            numIslands_helper(grid,x+1,y);
-            numIslands_helper(grid,x-1,y);
-            numIslands_helper(grid,x,y-1);
-            numIslands_helper(grid,x,y+1);
+            numIslands_helper(grid, x + 1, y);
+            numIslands_helper(grid, x - 1, y);
+            numIslands_helper(grid, x, y - 1);
+            numIslands_helper(grid, x, y + 1);
         }
-
-
 
 
         public int numMatchingSubseq(String s, String[] words) {
             int res = 0;
-            HashMap<String,Integer> map = new HashMap<>();
-            for(String str : words)
-                map.put(str,map.getOrDefault(str,0)+1);
-            for(String str : map.keySet()) { if(numMatchingSubseq_helper(str,s)) { res+=map.get(str); } }
+            HashMap<String, Integer> map = new HashMap<>();
+            for (String str : words)
+                map.put(str, map.getOrDefault(str, 0) + 1);
+            for (String str : map.keySet()) {
+                if (numMatchingSubseq_helper(str, s)) {
+                    res += map.get(str);
+                }
+            }
             return res;
         }
 
         private boolean numMatchingSubseq_helper(String s, String t) {
-            if(t.length() == 0){
-                if(s.length() == 0) return true;
+            if (t.length() == 0) {
+                if (s.length() == 0) return true;
                 else return false;
             }
-            if(s.length() == 0) return true;
+            if (s.length() == 0) return true;
             int pointer = 0;
             for (int i = 0; i < t.length(); i++) {
-                if(t.charAt(i) == s.charAt(pointer)){
+                if (t.charAt(i) == s.charAt(pointer)) {
                     pointer++;
                 }
-                if(pointer == s.length()) return true;
+                if (pointer == s.length()) return true;
             }
             return pointer == s.length();
         }
+
+
+        public List<Integer> countSmaller(int[] nums) {
+            int[] store = new int[(int) (2 * 10e4 + 1)];
+            List<Integer> res = new LinkedList<>();
+            if (nums.length == 0) return res;
+            res.add(0);
+            if (nums.length == 1) return res;
+            store[(int) (nums[nums.length - 1] + 10e4)]++;
+            for (int i = nums.length - 2; i >= 0; i--) {
+                res.add(0, countSmaller_helper(store, nums[i]));
+                store[(int) (nums[i] + 10e4)]++;
+            }
+            return res;
+        } // Slow Solution, cause Time Limit Exceeded TLE
+
+        private int countSmaller_helper(int[] nums, int target) {
+            int res = 0;
+            for (int i = 0; i < target + 10e4; i++) {
+                res += nums[i];
+            }
+            return res;
+        }
+
+
+        public List<Integer> findAnagrams(String s, String p) {
+            List<Integer> res = new LinkedList<>();
+            if (p.length() > s.length()) return res;
+
+            int[] pMap = new int[26], sMap = new int[26];
+            char last, next;
+            for (int i = 0; i < p.length(); i++) {
+                pMap[p.charAt(i) - 'a']++;
+                sMap[s.charAt(i) - 'a']++;
+            }
+            for (int i = 0; i <= s.length() - p.length(); i++) {
+                if (findAnagrams_helper(sMap, pMap))
+                    res.add(i);
+                if (i + p.length() >= s.length()) break;
+                last = s.charAt(i);
+                next = s.charAt(i + p.length());
+                sMap[last - 'a']--;
+                sMap[next - 'a']++;
+
+            }
+            return res;
+        }
+
+        private boolean findAnagrams_helper(int[] sMap, int[] pMap) {
+            for (int i = 0; i < sMap.length; i++) {
+                if (sMap[i] != pMap[i]) return false;
+            }
+            return true;
+        }
+
+
+        public int characterReplacement(String s, int k) {
+            HashMap<Character, Integer> map = new HashMap<>();
+            int max = Integer.MIN_VALUE, res = 0;
+            int l = 0, r = 0;
+            while (r < s.length()) {
+                char ch = s.charAt(r);
+                int x = map.getOrDefault(ch, 0);
+                map.put(ch, map.getOrDefault(ch, 0) + 1);
+                max = Math.max(max, map.get(s.charAt(r)));
+
+                if (r - l + 1 - max <= k) res = Math.max(res, r - l + 1);
+                else {
+                    map.put(s.charAt(l), map.get(s.charAt(l++)) - 1);
+                }
+                r++;
+            }
+            return res;
+        }
+
+
+        public boolean backspaceCompare(String s, String t) {
+            int i = s.length() - 1, j = t.length() - 1, skipS = 0, skipT = 0;
+            while (i >= 0 || j >= 0) {
+                while (i >= 0) {
+                    if (s.charAt(i) == '#') {
+                        skipS++;
+                        i--;
+                    } else if (skipS > 0) {
+                        skipS--;
+                        i--;
+                    } else break;
+                }
+                while (j >= 0) {
+                    if (t.charAt(j) == '#') {
+                        skipT++;
+                        j--;
+                    } else if (skipT > 0) {
+                        skipT--;
+                        j--;
+                    } else break;
+                }
+                if (i >= 0 && j >= 0 && s.charAt(i) != t.charAt(j)) return false;
+
+                if ((i >= 0) != (j >= 0)) return false;
+
+                i--;
+                j--;
+            }
+            return true;
+        }
+
+
+        public List<String> topKFrequent(String[] words, int k) {
+            PriorityQueue<StringFreq> pq = new PriorityQueue<>();
+            HashMap<String, Integer> map = new HashMap<>();
+            for (String str : words) //Insert all in a Hashmap to knew the freq for each word/ O(n)
+                map.put(str, map.getOrDefault(str, 0) + 1);
+            for (Map.Entry<String,Integer> entry : map.entrySet()) //insert into pq so we get most k freq words sorted/ O(nlogn)
+                pq.add(new StringFreq(entry.getKey(), entry.getValue()));
+
+            List<String> res = new LinkedList<>();
+            for (int i = 0; i < k; i++) { // get most k words/ O(log k)
+                res.add(pq.poll().word);
+            }
+            return res; // the hardest part!‼!, return ○_○
+        }
+        class StringFreq implements Comparable<StringFreq>{ // created a class to have an object contain a word, and it's freq together
+            String word;
+            int freq;
+
+            public StringFreq(String word, Integer freq) {
+                this.word = word;
+                this.freq = freq;
+            }
+
+            @Override
+            public int compareTo(StringFreq o) { // Here we reverse the order cause the PriorityQueue by default ascending order, we need a descending order
+                if(this.freq > o.freq) return -1;
+                if(o.freq > this.freq) return 1;
+                else return this.word.compareTo(o.word); // when two words have same freq, sort them by their lexicographical  order
+            }
+        }
+
+
+
+
+        public int lastStoneWeight(int[] stones) {
+            PriorityQueue<Integer> pq = new PriorityQueue<>(15, (a,b) -> b - a);
+            for(int stone : stones) pq.add(stone);
+            while(pq.size() != 1) {
+                int a = pq.poll(), b= pq.poll();
+                if(a == b) continue;
+                else pq.add(Math.abs(a-b));
+            }
+            return (pq.isEmpty() ? 0 : pq.poll());
+        }
+
+
+
+
+        public String decodeString(String s) {
+            int openIndex = s.lastIndexOf('['), closeIndex = decodeString_helper2(s,openIndex);
+            StringBuilder sb = new StringBuilder(s);
+            while (openIndex > 0) {
+                int repeat = decodeString_helper3(sb.toString(),openIndex);
+                String repeated = decodeString_helper4(sb.substring(openIndex+1,closeIndex),repeat);
+
+                String temp = String.valueOf(repeat);
+                sb.replace(openIndex - temp.length(),closeIndex+1,repeated);
+
+                openIndex = sb.toString().lastIndexOf('[');
+                closeIndex = decodeString_helper2(sb.toString(),openIndex);
+            }
+            return sb.toString();
+        }
+        private int decodeString_helper1(String s) { //get last '[' index in String s
+            return s.lastIndexOf('[');
+        }
+        private int decodeString_helper2(String s, int openBracketIndex) { //get first ']' index in String s
+            if(openBracketIndex == -1) return -1;
+            while (openBracketIndex++ < s.length())
+                if(s.charAt(openBracketIndex) == ']')
+                    return openBracketIndex;
+            return -1;
+        }
+        private int decodeString_helper3(String s, int openBracketIndex) { // extract the number before open bracket ('[')
+            String res = "";
+            while (--openBracketIndex >= 0){
+                if(Character.isDigit(s.charAt(openBracketIndex))) {
+                    res = s.charAt(openBracketIndex) + res;
+                }
+                else return Integer.parseInt(res);
+            }
+            return Integer.parseInt(res);
+        }
+        private String decodeString_helper4(String s, int repeat) {
+            String res = "";
+            for (int i = 0; i < repeat; i++) {
+                res+=s;
+            }
+            return res;
+        }
     }
 }
+
 
 
 
