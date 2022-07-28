@@ -1,9 +1,5 @@
 package LeetCode_Problems;
 
-import com.sun.org.apache.bcel.internal.generic.INEG;
-import sun.reflect.generics.tree.Tree;
-
-import java.text.DecimalFormat;
 import java.util.*;
 
 
@@ -40,8 +36,8 @@ public class Problems_Algorithm {
 //        right.left = rightleft;
         right.right = rightright;
 
-        int[][] in = new int[][]{{26, 9, 17}, {3, 4}};
-        String[][] strings = new String[][]{{"i","love","leetcode","i","love","coding"}, {"adsdf", "sfd"}, {"z"}};
+        int[][] in = new int[][]{{1,3,2,2,5,2,3,7}, {1,1,1,0},{0,1,0,0},{1,1,0,0}};
+        String[][] strings = new String[][]{{"5","2","C","D","+"}, {"adsdf", "sfd"}, {"z"}};
 
 
         List<List<String>> list = new LinkedList<>();
@@ -66,7 +62,8 @@ public class Problems_Algorithm {
         "mkgfzkkuxownxvfvxasy"
 [505870226,437526072,266740649,224336793,532917782,311122363,567754492,595798950,81520022,684110326,137742843,275267355,856903962,148291585,919054234,467541837,622939912,116899933,983296461,536563513]
          */
-        System.out.println(solution.decodeString("100[leetcode]"));
+
+        System.out.println(solution.calPoints(strings[0]));
 
     }
 
@@ -6111,8 +6108,178 @@ public class Problems_Algorithm {
             }
             return res;
         }
+
+
+
+
+        public TreeNode sortedArrayToBST(int[] nums) {
+            return sortedArrayToBST_helper(nums,0,nums.length-1);
+        }
+        private TreeNode sortedArrayToBST_helper(int[] nums, int left, int right) {
+            if(left > right) return null;
+            int mid = (right - left) / 2 + left;
+            TreeNode node = new TreeNode(nums[mid]);
+            node.left = sortedArrayToBST_helper(nums,left,mid-1);
+            node.right = sortedArrayToBST_helper(nums,mid+1,right);
+            return node;
+        }
+
+
+
+
+        public int islandPerimeter(int[][] grid) {
+            boolean[][] visits = new boolean[grid.length][grid[0].length];
+            int[] res = new int[1];
+            for (int i = 0; i < grid.length; i++) {
+                for (int j = 0; j < grid[0].length; j++) {
+                    if(grid[i][j] == 1) {
+                        islandPerimeter_helper(grid,visits,i,j,res);
+                        return res[0];
+                    }
+                }
+            }
+            return 0;
+        }
+        private void islandPerimeter_helper(int[][]grid, boolean[][] visits,int x, int y, int[] p) {
+            if(x < 0 || x > grid.length - 1) return ;
+            if(y < 0 || y > grid[0].length - 1) return ;
+            if(visits[x][y] || grid[x][y] == 0) return;
+
+            p[0]+=islandPerimeter_helper2(grid,x,y);
+            visits[x][y] = true;
+            islandPerimeter_helper(grid,visits,x+1,y,p);
+            islandPerimeter_helper(grid,visits,x-1,y,p);
+            islandPerimeter_helper(grid,visits,x,y-1,p);
+            islandPerimeter_helper(grid,visits,x,y+1,p);
+
+        }
+        private int islandPerimeter_helper2(int[][] grid, int x, int y) {
+            int temp = 0;
+            if(x-1 < 0) temp++;
+            else { if(grid[x-1][y] == 0) temp++; }
+            if(x+1 > grid.length-1) temp++;
+            else { if(grid[x+1][y] == 0) temp++; }
+
+            if(y-1 < 0) temp++;
+            else { if(grid[x][y-1] == 0) temp++; }
+            if(y+1 > grid[0].length-1) temp++;
+            else { if(grid[x][y+1] == 0) temp++; }
+
+            return temp;
+        }
+
+
+
+
+        public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+            Stack<Integer> stack = new Stack<>();
+            HashMap<Integer,Integer> map = new HashMap<>();
+            for (int i = nums2.length-1; i >= 0; i--) {
+                while (!stack.isEmpty() && stack.peek() < nums2[i]) stack.pop();
+                if(stack.isEmpty()) map.put(nums2[i],-1);
+                else map.put(nums2[i],stack.peek());
+                stack.push(nums2[i]);
+            }
+
+            int[] res = new int[nums1.length];
+            for (int i = 0; i < nums1.length; i++) {
+                res[i] = map.get(nums1[i]);
+            }
+            return res;
+        }
+
+
+
+
+        public String bestHand(int[] ranks, char[] suits) {
+            HashMap<Character, Integer> suitsMap = new HashMap<>();
+            HashMap<Integer, Integer> ranksMap = new HashMap<>();
+            for(char ch : suits) suitsMap.put(ch,suitsMap.getOrDefault(ch,0)+1);
+            for(int num : ranks) ranksMap.put(num,ranksMap.getOrDefault(num,0)+1);
+
+            if(suitsMap.size() == 1) return "Flush";
+            if(ranksMap.size() <= 2) return "Three of a Kind";
+            boolean fountTwoKind = false;
+            for(Map.Entry<Integer, Integer> entry : ranksMap.entrySet()) {
+                if(entry.getValue() == 3) return "Three of a Kind";
+                if(entry.getValue()==2)  fountTwoKind = true;
+            }
+            if(ranksMap.size() <= 4 || fountTwoKind) return "Pair";
+            return "High Card";
+        }
+
+
+
+
+        public int findLHS(int[] nums) {
+            HashMap<Integer, Integer> map = new HashMap<>();
+            int max = 0;
+            for(int num : nums) {
+                map.put(num, map.getOrDefault(num, 0) + 1);
+                if(map.containsKey(num+1))
+                    max = Math.max(max,map.get(num)+map.get(num+1));
+                if(map.containsKey(num-1))
+                    max = Math.max(max,map.get(num)+map.get(num-1));
+            }
+            return max;
+        }
+
+
+
+
+        public int maxCount(int m, int n, int[][] ops) { // the idea is save the smallest area, from it you can detect how much cells is max
+            int[] maxArea = {m,n};
+            for (int i = 0; i < ops.length; i++) {
+                maxArea[0] = Math.min(maxArea[0], ops[i][0]);
+                maxArea[1] = Math.min(maxArea[1], ops[i][1]);
+                if(maxArea[0] * maxArea[1] == 1) return 1; // if area became 1,it can't shrink more, so return 1
+            }
+            return maxArea[0] * maxArea[1];
+        }
+
+
+
+
+        public double findMaxAverage(int[] nums, int k) {
+            double sum=0;
+            for(int i=0;i<k;i++) sum+=nums[i];
+            double res=sum;
+            for(int i=k;i<nums.length;i++){
+                sum+=nums[i]-nums[i-k];
+                res=Math.max(res,sum);
+            }
+            return res/k;
+        }
+
+
+
+
+            public int calPoints(String[] ops) {
+                Stack<Integer> stack = new Stack();
+                int sum = 0, temp = 0;
+                for(String op : ops) {
+                    if (op.equals("+")) {
+                        int top = stack.pop();
+                        temp = top + stack.peek();
+                        stack.push(top);
+//                        stack.push(newtop);
+                    } else if (op.equals("C")) {
+                        sum-=stack.pop();
+                        continue;
+                    } else if (op.equals("D")) {
+                        temp = (2 * stack.peek());
+                    } else {
+                       temp = (Integer.valueOf(op));
+                    }
+                    stack.push(temp);
+                    sum+=temp;
+                }
+
+                return sum;
+            }
+        }
     }
-}
+
 
 
 
