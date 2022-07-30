@@ -36,8 +36,8 @@ public class Problems_Algorithm {
 //        right.left = rightleft;
         right.right = rightright;
 
-        int[][] in = new int[][]{{1,3,2,2,5,2,3,7}, {1,1,1,0},{0,1,0,0},{1,1,0,0}};
-        String[][] strings = new String[][]{{"5","2","C","D","+"}, {"adsdf", "sfd"}, {"z"}};
+        int[][] in = new int[][]{{1, 3, 2, 2, 5, 2, 3, 7}, {1, 1, 1, 0}, {0, 1, 0, 0}, {1, 1, 0, 0}};
+        String[][] strings = new String[][]{{"5", "2", "C", "D", "+"}, {"adsdf", "sfd"}, {"z"}};
 
 
         List<List<String>> list = new LinkedList<>();
@@ -6023,7 +6023,7 @@ public class Problems_Algorithm {
             HashMap<String, Integer> map = new HashMap<>();
             for (String str : words) //Insert all in a Hashmap to knew the freq for each word/ O(n)
                 map.put(str, map.getOrDefault(str, 0) + 1);
-            for (Map.Entry<String,Integer> entry : map.entrySet()) //insert into pq so we get most k freq words sorted/ O(nlogn)
+            for (Map.Entry<String, Integer> entry : map.entrySet()) //insert into pq so we get most k freq words sorted/ O(nlogn)
                 pq.add(new StringFreq(entry.getKey(), entry.getValue()));
 
             List<String> res = new LinkedList<>();
@@ -6032,7 +6032,8 @@ public class Problems_Algorithm {
             }
             return res; // the hardest part!‼!, return ○_○
         }
-        class StringFreq implements Comparable<StringFreq>{ // created a class to have an object contain a word, and it's freq together
+
+        class StringFreq implements Comparable<StringFreq> { // created a class to have an object contain a word, and it's freq together
             String word;
             int freq;
 
@@ -6043,88 +6044,85 @@ public class Problems_Algorithm {
 
             @Override
             public int compareTo(StringFreq o) { // Here we reverse the order cause the PriorityQueue by default ascending order, we need a descending order
-                if(this.freq > o.freq) return -1;
-                if(o.freq > this.freq) return 1;
-                else return this.word.compareTo(o.word); // when two words have same freq, sort them by their lexicographical  order
+                if (this.freq > o.freq) return -1;
+                if (o.freq > this.freq) return 1;
+                else
+                    return this.word.compareTo(o.word); // when two words have same freq, sort them by their lexicographical  order
             }
         }
 
 
-
-
         public int lastStoneWeight(int[] stones) {
-            PriorityQueue<Integer> pq = new PriorityQueue<>(15, (a,b) -> b - a);
-            for(int stone : stones) pq.add(stone);
-            while(pq.size() != 1) {
-                int a = pq.poll(), b= pq.poll();
-                if(a == b) continue;
-                else pq.add(Math.abs(a-b));
+            PriorityQueue<Integer> pq = new PriorityQueue<>(15, (a, b) -> b - a);
+            for (int stone : stones) pq.add(stone);
+            while (pq.size() != 1) {
+                int a = pq.poll(), b = pq.poll();
+                if (a == b) continue;
+                else pq.add(Math.abs(a - b));
             }
             return (pq.isEmpty() ? 0 : pq.poll());
         }
 
 
-
-
         public String decodeString(String s) {
-            int openIndex = s.lastIndexOf('['), closeIndex = decodeString_helper2(s,openIndex);
+            int openIndex = s.lastIndexOf('['), closeIndex = decodeString_helper2(s, openIndex);
             StringBuilder sb = new StringBuilder(s);
             while (openIndex > 0) {
-                int repeat = decodeString_helper3(sb.toString(),openIndex);
-                String repeated = decodeString_helper4(sb.substring(openIndex+1,closeIndex),repeat);
+                int repeat = decodeString_helper3(sb.toString(), openIndex);
+                String repeated = decodeString_helper4(sb.substring(openIndex + 1, closeIndex), repeat);
 
                 String temp = String.valueOf(repeat);
-                sb.replace(openIndex - temp.length(),closeIndex+1,repeated);
+                sb.replace(openIndex - temp.length(), closeIndex + 1, repeated);
 
                 openIndex = sb.toString().lastIndexOf('[');
-                closeIndex = decodeString_helper2(sb.toString(),openIndex);
+                closeIndex = decodeString_helper2(sb.toString(), openIndex);
             }
             return sb.toString();
         }
+
         private int decodeString_helper1(String s) { //get last '[' index in String s
             return s.lastIndexOf('[');
         }
+
         private int decodeString_helper2(String s, int openBracketIndex) { //get first ']' index in String s
-            if(openBracketIndex == -1) return -1;
+            if (openBracketIndex == -1) return -1;
             while (openBracketIndex++ < s.length())
-                if(s.charAt(openBracketIndex) == ']')
+                if (s.charAt(openBracketIndex) == ']')
                     return openBracketIndex;
             return -1;
         }
+
         private int decodeString_helper3(String s, int openBracketIndex) { // extract the number before open bracket ('[')
             String res = "";
-            while (--openBracketIndex >= 0){
-                if(Character.isDigit(s.charAt(openBracketIndex))) {
+            while (--openBracketIndex >= 0) {
+                if (Character.isDigit(s.charAt(openBracketIndex))) {
                     res = s.charAt(openBracketIndex) + res;
-                }
-                else return Integer.parseInt(res);
+                } else return Integer.parseInt(res);
             }
             return Integer.parseInt(res);
         }
+
         private String decodeString_helper4(String s, int repeat) {
             String res = "";
             for (int i = 0; i < repeat; i++) {
-                res+=s;
+                res += s;
             }
             return res;
         }
 
 
-
-
         public TreeNode sortedArrayToBST(int[] nums) {
-            return sortedArrayToBST_helper(nums,0,nums.length-1);
+            return sortedArrayToBST_helper(nums, 0, nums.length - 1);
         }
+
         private TreeNode sortedArrayToBST_helper(int[] nums, int left, int right) {
-            if(left > right) return null;
+            if (left > right) return null;
             int mid = (right - left) / 2 + left;
             TreeNode node = new TreeNode(nums[mid]);
-            node.left = sortedArrayToBST_helper(nums,left,mid-1);
-            node.right = sortedArrayToBST_helper(nums,mid+1,right);
+            node.left = sortedArrayToBST_helper(nums, left, mid - 1);
+            node.right = sortedArrayToBST_helper(nums, mid + 1, right);
             return node;
         }
-
-
 
 
         public int islandPerimeter(int[][] grid) {
@@ -6132,52 +6130,60 @@ public class Problems_Algorithm {
             int[] res = new int[1];
             for (int i = 0; i < grid.length; i++) {
                 for (int j = 0; j < grid[0].length; j++) {
-                    if(grid[i][j] == 1) {
-                        islandPerimeter_helper(grid,visits,i,j,res);
+                    if (grid[i][j] == 1) {
+                        islandPerimeter_helper(grid, visits, i, j, res);
                         return res[0];
                     }
                 }
             }
             return 0;
         }
-        private void islandPerimeter_helper(int[][]grid, boolean[][] visits,int x, int y, int[] p) {
-            if(x < 0 || x > grid.length - 1) return ;
-            if(y < 0 || y > grid[0].length - 1) return ;
-            if(visits[x][y] || grid[x][y] == 0) return;
 
-            p[0]+=islandPerimeter_helper2(grid,x,y);
+        private void islandPerimeter_helper(int[][] grid, boolean[][] visits, int x, int y, int[] p) {
+            if (x < 0 || x > grid.length - 1) return;
+            if (y < 0 || y > grid[0].length - 1) return;
+            if (visits[x][y] || grid[x][y] == 0) return;
+
+            p[0] += islandPerimeter_helper2(grid, x, y);
             visits[x][y] = true;
-            islandPerimeter_helper(grid,visits,x+1,y,p);
-            islandPerimeter_helper(grid,visits,x-1,y,p);
-            islandPerimeter_helper(grid,visits,x,y-1,p);
-            islandPerimeter_helper(grid,visits,x,y+1,p);
+            islandPerimeter_helper(grid, visits, x + 1, y, p);
+            islandPerimeter_helper(grid, visits, x - 1, y, p);
+            islandPerimeter_helper(grid, visits, x, y - 1, p);
+            islandPerimeter_helper(grid, visits, x, y + 1, p);
 
         }
+
         private int islandPerimeter_helper2(int[][] grid, int x, int y) {
             int temp = 0;
-            if(x-1 < 0) temp++;
-            else { if(grid[x-1][y] == 0) temp++; }
-            if(x+1 > grid.length-1) temp++;
-            else { if(grid[x+1][y] == 0) temp++; }
+            if (x - 1 < 0) temp++;
+            else {
+                if (grid[x - 1][y] == 0) temp++;
+            }
+            if (x + 1 > grid.length - 1) temp++;
+            else {
+                if (grid[x + 1][y] == 0) temp++;
+            }
 
-            if(y-1 < 0) temp++;
-            else { if(grid[x][y-1] == 0) temp++; }
-            if(y+1 > grid[0].length-1) temp++;
-            else { if(grid[x][y+1] == 0) temp++; }
+            if (y - 1 < 0) temp++;
+            else {
+                if (grid[x][y - 1] == 0) temp++;
+            }
+            if (y + 1 > grid[0].length - 1) temp++;
+            else {
+                if (grid[x][y + 1] == 0) temp++;
+            }
 
             return temp;
         }
 
 
-
-
         public int[] nextGreaterElement(int[] nums1, int[] nums2) {
             Stack<Integer> stack = new Stack<>();
-            HashMap<Integer,Integer> map = new HashMap<>();
-            for (int i = nums2.length-1; i >= 0; i--) {
+            HashMap<Integer, Integer> map = new HashMap<>();
+            for (int i = nums2.length - 1; i >= 0; i--) {
                 while (!stack.isEmpty() && stack.peek() < nums2[i]) stack.pop();
-                if(stack.isEmpty()) map.put(nums2[i],-1);
-                else map.put(nums2[i],stack.peek());
+                if (stack.isEmpty()) map.put(nums2[i], -1);
+                else map.put(nums2[i], stack.peek());
                 stack.push(nums2[i]);
             }
 
@@ -6189,96 +6195,218 @@ public class Problems_Algorithm {
         }
 
 
-
-
         public String bestHand(int[] ranks, char[] suits) {
             HashMap<Character, Integer> suitsMap = new HashMap<>();
             HashMap<Integer, Integer> ranksMap = new HashMap<>();
-            for(char ch : suits) suitsMap.put(ch,suitsMap.getOrDefault(ch,0)+1);
-            for(int num : ranks) ranksMap.put(num,ranksMap.getOrDefault(num,0)+1);
+            for (char ch : suits) suitsMap.put(ch, suitsMap.getOrDefault(ch, 0) + 1);
+            for (int num : ranks) ranksMap.put(num, ranksMap.getOrDefault(num, 0) + 1);
 
-            if(suitsMap.size() == 1) return "Flush";
-            if(ranksMap.size() <= 2) return "Three of a Kind";
+            if (suitsMap.size() == 1) return "Flush";
+            if (ranksMap.size() <= 2) return "Three of a Kind";
             boolean fountTwoKind = false;
-            for(Map.Entry<Integer, Integer> entry : ranksMap.entrySet()) {
-                if(entry.getValue() == 3) return "Three of a Kind";
-                if(entry.getValue()==2)  fountTwoKind = true;
+            for (Map.Entry<Integer, Integer> entry : ranksMap.entrySet()) {
+                if (entry.getValue() == 3) return "Three of a Kind";
+                if (entry.getValue() == 2) fountTwoKind = true;
             }
-            if(ranksMap.size() <= 4 || fountTwoKind) return "Pair";
+            if (ranksMap.size() <= 4 || fountTwoKind) return "Pair";
             return "High Card";
         }
-
-
 
 
         public int findLHS(int[] nums) {
             HashMap<Integer, Integer> map = new HashMap<>();
             int max = 0;
-            for(int num : nums) {
+            for (int num : nums) {
                 map.put(num, map.getOrDefault(num, 0) + 1);
-                if(map.containsKey(num+1))
-                    max = Math.max(max,map.get(num)+map.get(num+1));
-                if(map.containsKey(num-1))
-                    max = Math.max(max,map.get(num)+map.get(num-1));
+                if (map.containsKey(num + 1))
+                    max = Math.max(max, map.get(num) + map.get(num + 1));
+                if (map.containsKey(num - 1))
+                    max = Math.max(max, map.get(num) + map.get(num - 1));
             }
+            return max;
+        }
+
+
+        public int maxCount(int m, int n, int[][] ops) { // the idea is save the smallest area, from it you can detect how much cells is max
+            int[] maxArea = {m, n};
+            for (int i = 0; i < ops.length; i++) {
+                maxArea[0] = Math.min(maxArea[0], ops[i][0]);
+                maxArea[1] = Math.min(maxArea[1], ops[i][1]);
+                if (maxArea[0] * maxArea[1] == 1) return 1; // if area became 1,it can't shrink more, so return 1
+            }
+            return maxArea[0] * maxArea[1];
+        }
+
+
+        public double findMaxAverage(int[] nums, int k) {
+            double sum = 0;
+            for (int i = 0; i < k; i++) sum += nums[i];
+            double res = sum;
+            for (int i = k; i < nums.length; i++) {
+                sum += nums[i] - nums[i - k];
+                res = Math.max(res, sum);
+            }
+            return res / k;
+        }
+
+
+        public int calPoints(String[] ops) {
+            Stack<Integer> stack = new Stack();
+            int sum = 0, temp = 0;
+            for (String op : ops) {
+                if (op.equals("+")) {
+                    int top = stack.pop();
+                    temp = top + stack.peek();
+                    stack.push(top);
+//                        stack.push(newtop);
+                } else if (op.equals("C")) {
+                    sum -= stack.pop();
+                    continue;
+                } else if (op.equals("D")) {
+                    temp = (2 * stack.peek());
+                } else {
+                    temp = (Integer.valueOf(op));
+                }
+                stack.push(temp);
+                sum += temp;
+            }
+
+            return sum;
+        }
+
+
+        public int findLengthOfLCIS(int[] nums) {
+            int max = 0, temp = 1;
+            for (int i = 1; i < nums.length; i++) {
+                if(nums[i] > nums[i-1]) temp++;
+                else {
+                    max = Math.max(max, temp);
+                    temp = 0;
+                }
+            }
+            max = Math.max(max, temp);
             return max;
         }
 
 
 
 
-        public int maxCount(int m, int n, int[][] ops) { // the idea is save the smallest area, from it you can detect how much cells is max
-            int[] maxArea = {m,n};
-            for (int i = 0; i < ops.length; i++) {
-                maxArea[0] = Math.min(maxArea[0], ops[i][0]);
-                maxArea[1] = Math.min(maxArea[1], ops[i][1]);
-                if(maxArea[0] * maxArea[1] == 1) return 1; // if area became 1,it can't shrink more, so return 1
-            }
-            return maxArea[0] * maxArea[1];
-        }
 
-
-
-
-        public double findMaxAverage(int[] nums, int k) {
-            double sum=0;
-            for(int i=0;i<k;i++) sum+=nums[i];
-            double res=sum;
-            for(int i=k;i<nums.length;i++){
-                sum+=nums[i]-nums[i-k];
-                res=Math.max(res,sum);
-            }
-            return res/k;
-        }
-
-
-
-
-            public int calPoints(String[] ops) {
-                Stack<Integer> stack = new Stack();
-                int sum = 0, temp = 0;
-                for(String op : ops) {
-                    if (op.equals("+")) {
-                        int top = stack.pop();
-                        temp = top + stack.peek();
-                        stack.push(top);
-//                        stack.push(newtop);
-                    } else if (op.equals("C")) {
-                        sum-=stack.pop();
-                        continue;
-                    } else if (op.equals("D")) {
-                        temp = (2 * stack.peek());
-                    } else {
-                       temp = (Integer.valueOf(op));
-                    }
-                    stack.push(temp);
-                    sum+=temp;
+        public boolean isOneBitCharacter(int[] bits) {
+            boolean res = false;
+            for (int i = 0; i < bits.length; i++) {
+                if(bits[i] == 1) {
+                    i++;
+                    res = false;
+                    continue;
                 }
-
-                return sum;
+                res = true;
             }
+            return res;
+        }
+
+
+
+
+        class KthLargest {
+
+            PriorityQueue<Integer> pk;
+            int k;
+            public KthLargest(int k, int[] nums) {
+                this.k = k;
+                pk = new PriorityQueue<>();
+                for(int num : nums) pk.add(num);
+                while (pk.size() > k) pk.poll();
+            }
+
+            public int add(int val) {
+                pk.add(val);
+                while (pk.size() > this.k) pk.poll();
+                return pk.peek();
+            }
+        }
+
+
+
+
+        public int[][] diagonalSort(int[][] mat) {
+            List<Integer> xLine = new LinkedList<>(), yLine = new LinkedList<>();
+            List<Integer> vals = new ArrayList<>();
+            int x,y;
+            for (int i = mat.length-1; i >= 0; i--) {
+                x = i;
+                y = 0;
+                while (x < mat.length && y < mat[0].length) {
+                    vals.add(mat[x][y]);
+                    xLine.add(x++); yLine.add(y++);
+                }
+                Collections.sort(vals);
+                int pointer = 0;
+                while (!xLine.isEmpty()) {
+                    mat[xLine.get(0)][yLine.get(0)] = vals.get(pointer++);
+                    xLine.remove(0); yLine.remove(0);
+                }
+                vals.clear();
+            }
+            for (int i = 0; i < mat[0].length; i++) {
+                x = 0;
+                y = i;
+                while (x < mat.length && y < mat[0].length) {
+                    vals.add(mat[x][y]);
+                    xLine.add(x++); yLine.add(y++);
+                }
+                Collections.sort(vals);
+                int pointer = 0;
+                while (!xLine.isEmpty()) {
+                    mat[xLine.get(0)][yLine.get(0)] = vals.get(pointer++);
+                    xLine.remove(0); yLine.remove(0);
+                }
+                vals.clear();
+            }
+            return mat;
+        }
+
+
+
+
+        public boolean buddyStrings(String s, String goal) {
+            int[] sMap = new int[26], goalMap = new int[26];
+            for(char ch : s.toCharArray()) sMap[ch-'a']++;
+            for(char ch : goal.toCharArray()) goalMap[ch-'a']++;
+            for (int i = 0; i < sMap.length; i++)
+                if(sMap[i] != goalMap[i]) return false;
+
+            int diff = 0;
+            for (int i = 0; i < s.length(); i++) {
+                if(s.charAt(i) != goal.charAt(i))
+                    diff++;
+                if(diff > 2) return false;
+            }
+           if(diff == 2) return true;
+           for(int num : sMap) if(num >= 2) return true;
+           return false;
+        }
+
+
+
+
+
+        public int[] canSeePersonsCount(int[] heights) {
+            Stack<Integer> stack = new Stack<>();
+            int[] res = new int[heights.length];
+            for (int i = heights.length - 1; i >= 0; i--) {
+                while (!stack.isEmpty() && heights[i] > stack.peek()) {
+                    res[i]++;
+                    stack.pop();
+                }
+                if(!stack.isEmpty()) res[i]++;
+
+                if(stack.isEmpty() || heights[i] != stack.peek()) stack.push(heights[i]);
+            }
+            return res;
         }
     }
+}
 
 
 
