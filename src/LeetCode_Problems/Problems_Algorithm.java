@@ -1,6 +1,9 @@
 package LeetCode_Problems;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.LongStream;
 
 
 public class Problems_Algorithm {
@@ -36,7 +39,7 @@ public class Problems_Algorithm {
 //        right.left = rightleft;
         right.right = rightright;
 
-        int[][] in = new int[][]{{1, 3, 2, 2, 5, 2, 3, 7}, {1, 1, 1, 0}, {0, 1, 0, 0}, {1, 1, 0, 0}};
+        int[][] in = new int[][]{{1, 2,3}, {5, 8, 8, 5}, {0, 1, 0, 0}, {1, 1, 0, 0}};
         String[][] strings = new String[][]{{"5", "2", "C", "D", "+"}, {"adsdf", "sfd"}, {"z"}};
 
 
@@ -63,8 +66,7 @@ public class Problems_Algorithm {
 [505870226,437526072,266740649,224336793,532917782,311122363,567754492,595798950,81520022,684110326,137742843,275267355,856903962,148291585,919054234,467541837,622939912,116899933,983296461,536563513]
          */
 
-        System.out.println(solution.calPoints(strings[0]));
-
+        System.out.println(solution.permuteUnique(in[0]));
     }
 
     static class Solution {
@@ -146,6 +148,24 @@ public class Problems_Algorithm {
             public NNode(int _val, List<NNode> _children) {
                 val = _val;
                 children = _children;
+            }
+        }
+
+
+        class GNode {
+            public int val;
+            public List<GNode> neighbors;
+            public GNode() {
+                val = 0;
+                neighbors = new ArrayList<GNode>();
+            }
+            public GNode(int _val) {
+                val = _val;
+                neighbors = new ArrayList<GNode>();
+            }
+            public GNode(int _val, ArrayList<GNode> _neighbors) {
+                val = _val;
+                neighbors = _neighbors;
             }
         }
 
@@ -6278,7 +6298,7 @@ public class Problems_Algorithm {
         public int findLengthOfLCIS(int[] nums) {
             int max = 0, temp = 1;
             for (int i = 1; i < nums.length; i++) {
-                if(nums[i] > nums[i-1]) temp++;
+                if (nums[i] > nums[i - 1]) temp++;
                 else {
                     max = Math.max(max, temp);
                     temp = 0;
@@ -6289,13 +6309,10 @@ public class Problems_Algorithm {
         }
 
 
-
-
-
         public boolean isOneBitCharacter(int[] bits) {
             boolean res = false;
             for (int i = 0; i < bits.length; i++) {
-                if(bits[i] == 1) {
+                if (bits[i] == 1) {
                     i++;
                     res = false;
                     continue;
@@ -6306,16 +6323,15 @@ public class Problems_Algorithm {
         }
 
 
-
-
         class KthLargest {
 
             PriorityQueue<Integer> pk;
             int k;
+
             public KthLargest(int k, int[] nums) {
                 this.k = k;
                 pk = new PriorityQueue<>();
-                for(int num : nums) pk.add(num);
+                for (int num : nums) pk.add(num);
                 while (pk.size() > k) pk.poll();
             }
 
@@ -6327,24 +6343,24 @@ public class Problems_Algorithm {
         }
 
 
-
-
         public int[][] diagonalSort(int[][] mat) {
             List<Integer> xLine = new LinkedList<>(), yLine = new LinkedList<>();
             List<Integer> vals = new ArrayList<>();
-            int x,y;
-            for (int i = mat.length-1; i >= 0; i--) {
+            int x, y;
+            for (int i = mat.length - 1; i >= 0; i--) {
                 x = i;
                 y = 0;
                 while (x < mat.length && y < mat[0].length) {
                     vals.add(mat[x][y]);
-                    xLine.add(x++); yLine.add(y++);
+                    xLine.add(x++);
+                    yLine.add(y++);
                 }
                 Collections.sort(vals);
                 int pointer = 0;
                 while (!xLine.isEmpty()) {
                     mat[xLine.get(0)][yLine.get(0)] = vals.get(pointer++);
-                    xLine.remove(0); yLine.remove(0);
+                    xLine.remove(0);
+                    yLine.remove(0);
                 }
                 vals.clear();
             }
@@ -6353,13 +6369,15 @@ public class Problems_Algorithm {
                 y = i;
                 while (x < mat.length && y < mat[0].length) {
                     vals.add(mat[x][y]);
-                    xLine.add(x++); yLine.add(y++);
+                    xLine.add(x++);
+                    yLine.add(y++);
                 }
                 Collections.sort(vals);
                 int pointer = 0;
                 while (!xLine.isEmpty()) {
                     mat[xLine.get(0)][yLine.get(0)] = vals.get(pointer++);
-                    xLine.remove(0); yLine.remove(0);
+                    xLine.remove(0);
+                    yLine.remove(0);
                 }
                 vals.clear();
             }
@@ -6367,28 +6385,23 @@ public class Problems_Algorithm {
         }
 
 
-
-
         public boolean buddyStrings(String s, String goal) {
             int[] sMap = new int[26], goalMap = new int[26];
-            for(char ch : s.toCharArray()) sMap[ch-'a']++;
-            for(char ch : goal.toCharArray()) goalMap[ch-'a']++;
+            for (char ch : s.toCharArray()) sMap[ch - 'a']++;
+            for (char ch : goal.toCharArray()) goalMap[ch - 'a']++;
             for (int i = 0; i < sMap.length; i++)
-                if(sMap[i] != goalMap[i]) return false;
+                if (sMap[i] != goalMap[i]) return false;
 
             int diff = 0;
             for (int i = 0; i < s.length(); i++) {
-                if(s.charAt(i) != goal.charAt(i))
+                if (s.charAt(i) != goal.charAt(i))
                     diff++;
-                if(diff > 2) return false;
+                if (diff > 2) return false;
             }
-           if(diff == 2) return true;
-           for(int num : sMap) if(num >= 2) return true;
-           return false;
+            if (diff == 2) return true;
+            for (int num : sMap) if (num >= 2) return true;
+            return false;
         }
-
-
-
 
 
         public int[] canSeePersonsCount(int[] heights) {
@@ -6399,11 +6412,338 @@ public class Problems_Algorithm {
                     res[i]++;
                     stack.pop();
                 }
-                if(!stack.isEmpty()) res[i]++;
+                if (!stack.isEmpty()) res[i]++;
 
-                if(stack.isEmpty() || heights[i] != stack.peek()) stack.push(heights[i]);
+                if (stack.isEmpty() || heights[i] != stack.peek()) stack.push(heights[i]);
             }
             return res;
+        }
+
+
+        public int minimumOperations(int[] nums) {
+            Set<Integer> passed = new HashSet<>();
+            for (int num : nums) {
+                if (num == 0) continue;
+                passed.add(num);
+            }
+            return passed.size();
+        }
+
+
+        class NNumArray {
+            private int[] segmentTree;
+            private int n;
+
+            public NNumArray(int[] nums) {
+                this.n = nums.length;
+                segmentTree = new int[2 * n];
+                if (this.n > 0) buildSegmentTree(nums);
+            }
+
+            private void buildSegmentTree(int[] nums) {
+                for (int i = n, j = 0; i < 2 * n; i++, j++)
+                    segmentTree[i] = nums[j];
+
+                for (int i = n; i > 0; --i)
+                    segmentTree[i] = segmentTree[2 * i] + segmentTree[i * 2 + 1];
+
+            }
+
+            public void update(int index, int val) {
+                index += n;
+                segmentTree[index] = val;
+                while (index > 0) {
+                    int left = index, right = index;
+                    if (index % 2 == 0) right = index + 1;
+                    else left = index - 1;
+                    segmentTree[index / 2] = segmentTree[right] + segmentTree[left];
+                    index /= 2;
+                }
+
+            }
+
+            public int sumRange(int left, int right) {
+                int sum = 0;
+                left += n;
+                right += n;
+                while (left <= right) {
+                    if (left % 2 == 1) sum += segmentTree[left++];
+                    if (right % 2 == 0) sum += segmentTree[right--];
+
+                    left /= 2;
+                    right /= 2;
+                }
+                return sum;
+            }
+
+
+            public int kthSmallest(int[][] matrix, int k) {
+                int n = matrix.length, left = matrix[0][0], right = matrix[n - 1][n - 1];
+                while (left < right) {
+                    int mid = left + (right - left) / 2;
+                    if (kthSmallest_helper(matrix, mid, k)) right = mid;
+                    else left = mid + 1;
+                }
+                return left;
+            }
+
+            private boolean kthSmallest_helper(int[][] matrix, int target, int k) {
+                int i = matrix.length - 1, j = 0, num = 0;
+                while (i >= 0 && j < matrix.length) {
+                    if (matrix[i][j] <= target) {
+                        num += i + 1;
+                        j++;
+                    } else i--;
+                }
+                return num >= k;
+            }
+
+
+            class MyCalendar {
+                private TreeMap<Integer, Integer> calender;
+
+                public MyCalendar() {
+                    calender = new TreeMap<>();
+                }
+
+                public boolean book(int start, int end) {
+                    Integer prevBooked = calender.floorKey(start), nextBooked = calender.ceilingKey(start);
+                    if ((prevBooked == null || calender.get(prevBooked) <= start)
+                            && (nextBooked == null || end <= nextBooked)) {
+                        calender.put(start, end);
+                        return true;
+                    }
+                    return false;
+                }
+            }
+        }
+
+
+        public int mirrorReflection(int p, int q) {
+            while (p % 2 == 0 && q % 2 == 0) {
+                p /= 2;
+                q /= 2;
+            }
+            return 1 - p % 2 + q % 2;
+        }
+
+
+        public int combinationSum4(int[] nums, int target) {
+            int[] dp = new int[target + 1];
+            dp[0] = 1;
+            for (int i = 1; i < dp.length; i++) {
+                for (int num : nums) {
+                    if (i - num >= 0)
+                        dp[i] += dp[i - num];
+                }
+            }
+            return dp[target];
+        }
+
+
+        public int poorPigs(int buckets, int minutesToDie, int minutesToTest) {
+            return (int) Math.ceil(Math.log(buckets) / Math.log(minutesToTest / minutesToDie + 1));
+        }
+
+
+        public int firstUniqChar(String s) {
+            int[] freq = new int[26];
+            for (char ch : s.toCharArray()) freq[ch - 'a']++;
+            for (int i = 0; i < s.length(); i++) {
+                if (freq[s.charAt(i) - 'a'] == 1) return i;
+            }
+            return -1;
+        }
+
+
+        public int search(int[] nums, int target) {
+            if (nums[0] <= nums[nums.length - 1]) {
+                int res = Arrays.binarySearch(nums, target);
+                if (res < 0) return -1;
+                return res;
+            }
+            int l = 0, r = nums.length - 1, mid = 0, res;
+            while (l < r) {
+                mid = l + (r - l) / 2;
+                if (nums[mid] < nums[r]) r = mid;
+                else l = mid + 1;
+            }
+            if (nums[l] == target) return l;
+
+            res = Arrays.binarySearch(nums, 0, l, target);
+            if (res >= 0) return res;
+            res = Arrays.binarySearch(nums, l, nums.length, target);
+            if (res < 0) return -1;
+            return res;
+        }
+
+
+        public List<List<Integer>> mergeSimilarItems(int[][] items1, int[][] items2) {
+            HashMap<Integer, Integer> map = new HashMap<>();
+            for (int[] ary : items1)
+                map.put(ary[0], map.getOrDefault(ary[0], 0) + ary[1]);
+            for (int[] ary : items2)
+                map.put(ary[0], map.getOrDefault(ary[0], 0) + ary[1]);
+            PriorityQueue<int[]> pq = new PriorityQueue<>(10, (a, b) -> a[0] - b[0]);
+            for (Map.Entry<Integer, Integer> entry : map.entrySet())
+                pq.add(new int[]{entry.getKey(), entry.getValue()});
+
+            List<List<Integer>> res = new LinkedList<>();
+            while (!pq.isEmpty()) {
+                int[] temp = pq.poll();
+                List<Integer> tempL = new LinkedList<>();
+                tempL.add(temp[0]);
+                tempL.add(temp[1]);
+                res.add(tempL);
+            }
+            return res;
+        }
+
+
+        public int countVowelPermutation(int n) {
+            long[][] dp = new long[n + 1][5];
+            int mod = (int) (1e9 + 7);
+            Arrays.fill(dp[0], 1);
+            for (int i = 1; i < dp.length; i++) {
+                dp[i][0] = (dp[i - 1][1] + dp[i - 1][2] + dp[i - 1][4]);
+                dp[i][0] %= mod;
+
+                dp[i][1] = (dp[i - 1][0] + dp[i - 1][2]);
+                dp[i][1] %= mod;
+
+                dp[i][2] = (dp[i - 1][1] + dp[i - 1][3]);
+                dp[i][2] %= mod;
+
+                dp[i][3] = (dp[i - 1][2]);
+                dp[i][3] %= mod;
+
+                dp[i][4] = (dp[i - 1][2] + dp[i - 1][3]);
+                dp[i][4] %= mod;
+            }
+            return (int) (LongStream.of(dp[n - 1]).sum() % mod);
+        }
+
+
+        public int lengthOfLIS(int[] nums) {
+            ArrayList<Integer> ary = new ArrayList<>();
+            for (int num : nums) {
+                if (ary.isEmpty() || ary.get(ary.size() - 1) < num) ary.add(num);
+                else {
+                    ary.set(lengthOfLIS_helper(ary, num), num);
+                }
+            }
+            return ary.size();
+        }
+
+        private int lengthOfLIS_helper(ArrayList<Integer> ary, int x) {
+            int l = 0, r = ary.size() - 1;
+            while (l < r) {
+                int mid = l + (r - l) / 2;
+                if (ary.get(mid) < x)
+                    l = mid + 1;
+                else r = mid;
+            }
+            return l;
+        }
+
+
+        public String countAndSay(int n) {
+            String[] dp = new String[n + 1];
+            dp[1] = "1";
+            for (int i = 2; i <= n; i++) {
+                dp[i] = countAndSay_helper(dp[i - 1]);
+            }
+            return dp[n];
+        }
+
+        private String countAndSay_helper(String num) {
+            int counter = 1;
+            char ch = num.charAt(0);
+            StringBuilder sb = new StringBuilder();
+            for (int i = 1; i < num.length(); i++) {
+                if (num.charAt(i) == ch) counter++;
+                else {
+                    sb.append(String.valueOf(counter) + String.valueOf(ch));
+                    ch = num.charAt(i);
+                    counter = 1;
+                }
+            }
+            if (num.charAt(num.length() - 1) == ch)
+                sb.append(String.valueOf(counter) + String.valueOf(ch));
+            return sb.toString();
+        }
+
+
+        public int numFactoredBinaryTrees(int[] arr) {
+            HashMap<Integer, Integer> map = new HashMap<>();
+            long[] dp = new long[arr.length];
+            Arrays.sort(arr);
+            Arrays.fill(dp, 1);
+            for (int i = 0; i < arr.length; i++) map.put(arr[i], i);
+
+            for (int i = 0; i < arr.length; ++i) {
+                for (int j = 0; j < i; ++j) {
+                    if (arr[i] % arr[j] == 0) {
+                        if (map.containsKey(arr[i] / arr[j])) {
+                            dp[i] += (dp[j] * map.get(arr[i] / arr[j])) % (1e9 + 7);
+                        }
+                    }
+                }
+            }
+            return (int) (LongStream.of(dp).sum() / (1e9 + 7));
+        }
+
+
+        public List<List<Integer>> permuteUnique(int[] nums) {
+            List<List<Integer>> res = new LinkedList<>();
+            Set<String> set = new HashSet<>();
+            permuteUnique_helper(nums, new int[nums.length], res, 1, set);
+            return res;
+        }
+
+        private void permuteUnique_helper(int a[], int visited[], List<List<Integer>> ans, int count, Set<String> set) {
+            if (count == a.length + 1) {
+                List<Integer> now = new ArrayList<>();
+                for (int i = 0; i < a.length; i++)
+                    now.add(0);
+                for (int i = 0; i < a.length; i++) {
+                    now.set(visited[i] - 1, a[i]);
+                }
+               String temp = now.toString();
+                if (!set.contains(temp)) {
+                    ans.add(now);
+                    set.add(temp);
+                }
+                return;
+            }
+
+            for (int i = 0; i < a.length; i++) {
+                if (visited[i] != 0)
+                    continue;
+                visited[i] = count;
+                permuteUnique_helper(a, visited, ans, count + 1, set);
+                visited[i] = 0;
+            }
+        }
+
+
+
+
+        public GNode cloneGraph(GNode node) {
+            HashMap<Integer,GNode> table = new HashMap<>();
+            return cloneGraph_helper(node,table);
+        }
+        private GNode cloneGraph_helper(GNode node, HashMap<Integer,GNode> table) {
+            if(!table.containsKey(node.val)) {
+                table.put(node.val,new GNode(node.val));
+            }
+            GNode curr = table.get(node.val);
+            for(GNode temp : node.neighbors) {
+                if(!table.containsKey(temp.val))
+                    curr.neighbors.add(cloneGraph_helper(temp,table));
+                else curr.neighbors.add(table.get(temp.val));
+            }
+            return curr;
         }
     }
 }
