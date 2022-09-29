@@ -1,8 +1,7 @@
 package LeetCode_Problems;
 
+
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import java.util.stream.LongStream;
 
 
@@ -13,13 +12,13 @@ public class Problems_Algorithm {
         Solution.ListNode head = new Solution.ListNode(1);
         Solution.ListNode mid1 = new Solution.ListNode(2);
         Solution.ListNode mid2 = new Solution.ListNode(3);
-        Solution.ListNode mid3 = new Solution.ListNode(4);
-        Solution.ListNode tail = new Solution.ListNode(5);
+        Solution.ListNode mid3 = new Solution.ListNode(2);
+        Solution.ListNode tail = new Solution.ListNode(1);
 
         head.next = mid1;
         mid1.next = mid2;
         mid2.next = mid3;
-        mid3.next = mid1;
+        mid3.next = tail;
 
 
         Solution.TreeNode root = new Solution.TreeNode(1);
@@ -39,7 +38,7 @@ public class Problems_Algorithm {
 //        right.left = rightleft;
         right.right = rightright;
 
-        int[][] in = new int[][]{{1, 2,3}, {5, 8, 8, 5}, {0, 1, 0, 0}, {1, 1, 0, 0}};
+        int[][] in = new int[][]{{1,2,3,4,5,5,6,7}, {4,5,6}, {7,8,9}};
         String[][] strings = new String[][]{{"5", "2", "C", "D", "+"}, {"adsdf", "sfd"}, {"z"}};
 
 
@@ -66,7 +65,7 @@ public class Problems_Algorithm {
 [505870226,437526072,266740649,224336793,532917782,311122363,567754492,595798950,81520022,684110326,137742843,275267355,856903962,148291585,919054234,467541837,622939912,116899933,983296461,536563513]
          */
 
-        System.out.println(solution.permuteUnique(in[0]));
+        System.out.println(solution.findClosestElements(new int[]{1, 2, 3, 4, 5},4,5));
     }
 
     static class Solution {
@@ -6744,6 +6743,271 @@ public class Problems_Algorithm {
                 else curr.neighbors.add(table.get(temp.val));
             }
             return curr;
+        }
+
+
+
+
+        public List<Integer> spiralOrder(int[][] matrix) {
+            List<Integer> res = new LinkedList<>();
+            int top = 0, left = 0, right = matrix[0].length-1, bottom = matrix.length-1;
+
+            while (left <= right && top <= bottom) {
+                for (int i = left; i <= right; i++) {
+                    res.add(matrix[top][i]);
+                }
+                for (int i = top+1; i <= bottom; i++) {
+                    res.add(matrix[i][right]);
+                }
+
+                if(left < right && top < bottom) {
+                    for (int i = right-1; i > left ; i--) {
+                        res.add(matrix[bottom][i]);
+                    }
+                    for (int i = bottom; i > top; i--) {
+                        res.add(matrix[i][left]);
+                    }
+                }
+                top++; bottom--; left++; right--;
+            }
+
+            return res;
+        }
+
+
+
+
+        public int uniqueMorseRepresentations(String[] words) {
+            String[] codes = {".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."};
+            StringBuilder temp;
+            Set<String> set = new HashSet<>();
+            for(String word : words){
+                temp = new StringBuilder();
+                for(char ch : word.toCharArray()){
+                    temp.append(codes[ch-'a']);
+                }
+                set.add(temp.toString());
+            }
+            return set.size();
+        }
+
+
+
+
+        public int minSetSize(int[] arr) {
+            HashMap<Integer,Integer> map = new HashMap<>();
+            int n = arr.length;
+            for(int num : arr) map.put(num,map.getOrDefault(num,0)+1);
+            Map<Integer,Integer> m = sortByValue(map);
+            int counter = 0;
+            for(Map.Entry<Integer,Integer> e : m.entrySet()) {
+                if(n <= arr.length/2) return counter;
+                counter++;
+                n-=e.getValue();
+            }
+            return m.size();
+        }
+        private HashMap<Integer, Integer> sortByValue(HashMap<Integer, Integer> hm) {
+            // Create a list from elements of HashMap
+            List<Map.Entry<Integer, Integer> > list =
+                    new LinkedList<Map.Entry<Integer, Integer> >(hm.entrySet());
+
+            // Sort the list
+            Collections.sort(list, new Comparator<Map.Entry<Integer, Integer> >() {
+                public int compare(Map.Entry<Integer, Integer> o1,
+                                   Map.Entry<Integer, Integer> o2)
+                {
+                    return (o2.getValue()).compareTo(o1.getValue());
+                }
+            });
+
+            // put data from sorted list to hashmap
+            HashMap<Integer, Integer> temp = new LinkedHashMap<Integer, Integer>();
+            for (Map.Entry<Integer, Integer> aa : list) {
+                temp.put(aa.getKey(), aa.getValue());
+            }
+            return temp;
+        }
+
+
+
+
+        public boolean isPossible(int[] nums) {
+            HashMap<Integer,Integer> map =new HashMap<>(), req = new HashMap<>();
+            for(int num : nums) map.put(num,map.getOrDefault(num,0)+1);
+            for (int num : nums) {
+                if(map.getOrDefault(num,0) > 0 &&
+                        req.getOrDefault(num,0) > 0){
+                    map.put(num,map.get(num)-1);
+                    req.put(num,req.get(num)-1);
+                    req.put(num+1,req.getOrDefault(num+1,0)+1);
+                }
+
+                else if(map.getOrDefault(num,0) > 0 &&
+                        map.getOrDefault(num+1,0) > 0 &&
+                        map.getOrDefault(num+2,0) > 0) {
+                    map.put(num,map.get(num)-1);
+                    map.put(num+1,map.get(num+1)-1);
+                    map.put(num+2,map.get(num+2)-1);
+                    req.put(num+3,req.getOrDefault(num+3,0)+1);
+                }
+
+                else if(map.getOrDefault(num,0) > 0) return false;
+            }
+            return true;
+        }
+
+
+
+        public boolean isPalindrome(ListNode head) {
+            ListNode[] h = {head};
+            ListNode t = head;
+            return isPalindrome_helper(h,t);
+        }
+        private boolean isPalindrome_helper(ListNode[] left, ListNode right) {
+            if(right == null) return true;
+            boolean flag = isPalindrome_helper(left, right.next) && left[0].val == right.val;
+            left[0] = left[0].next;
+            return flag;
+        }
+
+
+
+
+        public String convert(String s, int numRows) {
+            if(s.length() <= numRows || numRows == 1) return s;
+            StringBuilder sb = new StringBuilder();
+            boolean down = false;
+            int curRow = 0;
+            List<StringBuilder> rows = new ArrayList<>();
+            for (int i = 0; i < Math.min(numRows, s.length()); i++) {
+                rows.add(new StringBuilder());
+            }
+            for (char ch : s.toCharArray()) {
+                rows.get(curRow).append(ch);
+                if(curRow == 0 || curRow == numRows - 1) down = !down;
+                curRow += down ? 1 : -1;
+            }
+            for(StringBuilder row : rows) sb.append(row);
+            return sb.toString();
+        }
+
+
+
+
+        public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+            List<List<Integer>> list = new ArrayList<>();
+            Arrays.sort(candidates);
+            helper_combinationSum2(list, new ArrayList<>(), candidates, 0, target);
+            return list;
+        }
+
+        public void helper_combinationSum2(List<List<Integer>> list, List<Integer> temp, int[] candidates, int start, int target) {
+            // base case
+            if(target == 0) {
+               list.add(new ArrayList<>(temp));
+                return;
+            }
+            for (int nextCurr = start; nextCurr < candidates.length; ++nextCurr) {
+                if(nextCurr < start && candidates[nextCurr] == candidates[nextCurr-1]) continue;
+                Integer pick = candidates[nextCurr];
+                if(target - pick < 0) break;
+                temp.add(pick);
+                helper_combinationSum2(list,temp,candidates,start+1,target-pick);
+                temp.remove(temp.size()-1);
+            }
+
+        }
+
+
+
+
+        public String pushDominoes(String dominoes) {
+            char[] domino = dominoes.toCharArray();
+            char[] res = domino;
+            int pointer = 0;
+            for (int i = 0; i < domino.length; i++) {
+                switch (domino[i]) {
+                    case '.': continue;
+                    case 'L':
+                        pointer = i-1;
+                        while (pointer >= 0 && domino[pointer] == '.'){pointer--;}
+                        if(pointer < 0 || domino[pointer] == 'L') {
+                            if(pointer < 0) pointer = 0;
+                            Arrays.fill(res, pointer, i+1, 'L');
+                        }
+                        break;
+                    case 'R':
+                        pointer = i+1;
+                        while (pointer < domino.length && domino[pointer] == '.'){pointer++;}
+                        if(pointer >= domino.length || domino[pointer] == 'R') {
+                            if(pointer >= domino.length) pointer = domino.length - 1;
+                            Arrays.fill(res, i, pointer+1, 'R');
+                        }
+                        else {
+                            if(pointer == i+1) {
+                                i = pointer;
+                                continue;
+                            }
+                            int from,to;
+                            to = ((pointer - 1) - (i + 1)) / 2 + i + 1;
+                            if((pointer + i + 1) % 2 == 0) from = ++to;
+                            else from = to+1;
+                            Arrays.fill(res, i, to, 'R');
+                            Arrays.fill(res, from, pointer, 'L');
+                            i = pointer;
+                        }
+                }
+            }
+            return String.valueOf(res);
+        }
+
+
+
+
+        public List<Integer> findClosestElements(int[] arr, int k, int x) {
+            List<Integer> res = new ArrayList<>(k);
+            int index = Arrays.binarySearch(arr,x);
+            if(index < 0) index = -(index + 1);
+            boolean left = true, right = true;
+            int l = index-1, r = index;
+
+            if(index == 0) left = false;
+            if(index == arr.length) right = false;
+
+            while (res.size() < k) {
+                if(left && right) {
+                    int tempLeft = arr[l], tempRight = arr[r];
+                    int a = Math.abs(tempLeft - x), b = Math.abs(tempRight - x);
+                    if(a < b) {
+                        res.add(tempLeft);
+                        l--;
+                    }
+                    else if(b < a) {
+                        res.add(tempRight);
+                        r++;
+                    }
+                    else {
+                        res.add(Math.min(tempLeft, tempRight));
+                        l--;
+                    }
+
+                    if(l < 0) left = false;
+                    if(r >= arr.length) right = false;
+                    continue;
+                }
+                if(left) {
+                    res.add(arr[l--]);
+                    if(l < 0) left = false;
+                    continue;
+                }
+                if(right) {
+                    res.add(arr[r++]);
+                    if(r >= arr.length) right = false;
+                }
+            }
+            Collections.sort(res);
+            return res;
         }
     }
 }
