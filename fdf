@@ -1,0 +1,531 @@
+[33mcommit 8ac47978db3a1a05ee14ffd45a845621d372cbc9[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: Killua <ibrahimtarekeslim@gmail.com>
+Date:   Thu Sep 29 21:59:37 2022 +0300
+
+    325 Solved || 29:09:2022 - 09-59-PM
+
+[1mdiff --git a/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$1.class b/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$1.class[m
+[1mnew file mode 100644[m
+[1mindex 0000000..17660ef[m
+Binary files /dev/null and b/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$1.class differ
+[1mdiff --git a/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$GNode.class b/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$GNode.class[m
+[1mnew file mode 100644[m
+[1mindex 0000000..82ae7f9[m
+Binary files /dev/null and b/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$GNode.class differ
+[1mdiff --git a/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$KthLargest.class b/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$KthLargest.class[m
+[1mindex d6640bb..5f8f4ce 100644[m
+Binary files a/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$KthLargest.class and b/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$KthLargest.class differ
+[1mdiff --git a/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$ListNode.class b/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$ListNode.class[m
+[1mindex a67a0b7..c8da3b5 100644[m
+Binary files a/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$ListNode.class and b/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$ListNode.class differ
+[1mdiff --git a/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$NNode.class b/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$NNode.class[m
+[1mindex ea1cd95..97c138b 100644[m
+Binary files a/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$NNode.class and b/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$NNode.class differ
+[1mdiff --git a/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$NNumArray$MyCalendar.class b/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$NNumArray$MyCalendar.class[m
+[1mindex 7fe912a..e706af8 100644[m
+Binary files a/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$NNumArray$MyCalendar.class and b/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$NNumArray$MyCalendar.class differ
+[1mdiff --git a/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$NNumArray.class b/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$NNumArray.class[m
+[1mindex 4a17d23..731d81a 100644[m
+Binary files a/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$NNumArray.class and b/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$NNumArray.class differ
+[1mdiff --git a/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$Node.class b/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$Node.class[m
+[1mindex b6eac92..95dc29e 100644[m
+Binary files a/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$Node.class and b/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$Node.class differ
+[1mdiff --git a/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$NumArray.class b/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$NumArray.class[m
+[1mindex c5f786f..ebd4aac 100644[m
+Binary files a/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$NumArray.class and b/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$NumArray.class differ
+[1mdiff --git a/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$StringFreq.class b/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$StringFreq.class[m
+[1mindex 01f998f..ed81f3e 100644[m
+Binary files a/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$StringFreq.class and b/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$StringFreq.class differ
+[1mdiff --git a/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$TreeNode.class b/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$TreeNode.class[m
+[1mindex dc1de4c..533d537 100644[m
+Binary files a/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$TreeNode.class and b/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$TreeNode.class differ
+[1mdiff --git a/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$TreeNodeExtra.class b/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$TreeNodeExtra.class[m
+[1mindex a071647..5fb8aa7 100644[m
+Binary files a/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$TreeNodeExtra.class and b/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$TreeNodeExtra.class differ
+[1mdiff --git a/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution.class b/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution.class[m
+[1mindex a24709f..48c752e 100644[m
+Binary files a/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution.class and b/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution.class differ
+[1mdiff --git a/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm.class b/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm.class[m
+[1mindex 6793c87..996edfe 100644[m
+Binary files a/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm.class and b/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm.class differ
+[1mdiff --git a/src/LeetCode_Problems/Problems_Algorithm.java b/src/LeetCode_Problems/Problems_Algorithm.java[m
+[1mindex c2074fa..5bb8a17 100644[m
+[1m--- a/src/LeetCode_Problems/Problems_Algorithm.java[m
+[1m+++ b/src/LeetCode_Problems/Problems_Algorithm.java[m
+[36m@@ -1,8 +1,7 @@[m
+ package LeetCode_Problems;[m
+ [m
+[32m+[m
+ import java.util.*;[m
+[31m-import java.util.stream.Collectors;[m
+[31m-import java.util.stream.IntStream;[m
+ import java.util.stream.LongStream;[m
+ [m
+ [m
+[36m@@ -13,13 +12,13 @@[m [mpublic class Problems_Algorithm {[m
+         Solution.ListNode head = new Solution.ListNode(1);[m
+         Solution.ListNode mid1 = new Solution.ListNode(2);[m
+         Solution.ListNode mid2 = new Solution.ListNode(3);[m
+[31m-        Solution.ListNode mid3 = new Solution.ListNode(4);[m
+[31m-        Solution.ListNode tail = new Solution.ListNode(5);[m
+[32m+[m[32m        Solution.ListNode mid3 = new Solution.ListNode(2);[m
+[32m+[m[32m        Solution.ListNode tail = new Solution.ListNode(1);[m
+ [m
+         head.next = mid1;[m
+         mid1.next = mid2;[m
+         mid2.next = mid3;[m
+[31m-        mid3.next = mid1;[m
+[32m+[m[32m        mid3.next = tail;[m
+ [m
+ [m
+         Solution.TreeNode root = new Solution.TreeNode(1);[m
+[36m@@ -39,7 +38,7 @@[m [mpublic class Problems_Algorithm {[m
+ //        right.left = rightleft;[m
+         right.right = rightright;[m
+ [m
+[31m-        int[][] in = new int[][]{{1, 2,3}, {5, 8, 8, 5}, {0, 1, 0, 0}, {1, 1, 0, 0}};[m
+[32m+[m[32m        int[][] in = new int[][]{{1,2,3,4,5,5,6,7}, {4,5,6}, {7,8,9}};[m
+         String[][] strings = new String[][]{{"5", "2", "C", "D", "+"}, {"adsdf", "sfd"}, {"z"}};[m
+ [m
+ [m
+[36m@@ -66,7 +65,7 @@[m [mpublic class Problems_Algorithm {[m
+ [505870226,437526072,266740649,224336793,532917782,311122363,567754492,595798950,81520022,684110326,137742843,275267355,856903962,148291585,919054234,467541837,622939912,116899933,983296461,536563513][m
+          */[m
+ [m
+[31m-        System.out.println(solution.permuteUnique(in[0]));[m
+[32m+[m[32m        System.out.println(solution.findClosestElements(new int[]{1, 2, 3, 4, 5},4,5));[m
+     }[m
+ [m
+     static class Solution {[m
+[36m@@ -6745,6 +6744,271 @@[m [mpublic class Problems_Algorithm {[m
+             }[m
+             return curr;[m
+         }[m
+[32m+[m
+[32m+[m
+[32m+[m
+[32m+[m
+[32m+[m[32m        public List<Integer> spiralOrder(int[][] matrix) {[m
+[32m+[m[32m            List<Integer> res = new LinkedList<>();[m
+[32m+[m[32m            int top = 0, left = 0, right = matrix[0].length-1, bottom = matrix.length-1;[m
+[32m+[m
+[32m+[m[32m            while (left <= right && top <= bottom) {[m
+[32m+[m[32m                for (int i = left; i <= right; i++) {[m
+[32m+[m[32m                    res.add(matrix[top][i]);[m
+[32m+[m[32m                }[m
+[32m+[m[32m                for (int i = top+1; i <= bottom; i++) {[m
+[32m+[m[32m                    res.add(matrix[i][right]);[m
+[32m+[m[32m                }[m
+[32m+[m
+[32m+[m[32m                if(left < right && top < bottom) {[m
+[32m+[m[32m                    for (int i = right-1; i > left ; i--) {[m
+[32m+[m[32m                        res.add(matrix[bottom][i]);[m
+[32m+[m[32m                    }[m
+[32m+[m[32m                    for (int i = bottom; i > top; i--) {[m
+[32m+[m[32m                        res.add(matrix[i][left]);[m
+[32m+[m[32m                    }[m
+[32m+[m[32m                }[m
+[32m+[m[32m                top++; bottom--; left++; right--;[m
+[32m+[m[32m            }[m
+[32m+[m
+[32m+[m[32m            return res;[m
+[32m+[m[32m        }[m
+[32m+[m
+[32m+[m
+[32m+[m
+[32m+[m
+[32m+[m[32m        public int uniqueMorseRepresentations(String[] words) {[m
+[32m+[m[32m            String[] codes = {".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."};[m
+[32m+[m[32m            StringBuilder temp;[m
+[32m+[m[32m            Set<String> set = new HashSet<>();[m
+[32m+[m[32m            for(String word : words){[m
+[32m+[m[32m                temp = new StringBuilder();[m
+[32m+[m[32m                for(char ch : word.toCharArray()){[m
+[32m+[m[32m                    temp.append(codes[ch-'a']);[m
+[32m+[m[32m                }[m
+[32m+[m[32m                set.add(temp.toString());[m
+[32m+[m[32m            }[m
+[32m+[m[32m            return set.size();[m
+[32m+[m[32m        }[m
+[32m+[m
+[32m+[m
+[32m+[m
+[32m+[m
+[32m+[m[32m        public int minSetSize(int[] arr) {[m
+[32m+[m[32m            HashMap<Integer,Integer> map = new HashMap<>();[m
+[32m+[m[32m            int n = arr.length;[m
+[32m+[m[32m            for(int num : arr) map.put(num,map.getOrDefault(num,0)+1);[m
+[32m+[m[32m            Map<Integer,Integer> m = sortByValue(map);[m
+[32m+[m[32m            int counter = 0;[m
+[32m+[m[32m            for(Map.Entry<Integer,Integer> e : m.entrySet()) {[m
+[32m+[m[32m                if(n <= arr.length/2) return counter;[m
+[32m+[m[32m                counter++;[m
+[32m+[m[32m                n-=e.getValue();[m
+[32m+[m[32m            }[m
+[32m+[m[32m            return m.size();[m
+[32m+[m[32m        }[m
+[32m+[m[32m        private HashMap<Integer, Integer> sortByValue(HashMap<Integer, Integer> hm) {[m
+[32m+[m[32m            // Create a list from elements of HashMap[m
+[32m+[m[32m            List<Map.Entry<Integer, Integer> > list =[m
+[32m+[m[32m                    new LinkedList<Map.Entry<Integer, Integer> >(hm.entrySet());[m
+[32m+[m
+[32m+[m[32m            // Sort the list[m
+[32m+[m[32m            Collections.sort(list, new Comparator<Map.Entry<Integer, Integer> >() {[m
+[32m+[m[32m                public int compare(Map.Entry<Integer, Integer> o1,[m
+[32m+[m[32m                                   Map.Entry<Integer, Integer> o2)[m
+[32m+[m[32m                {[m
+[32m+[m[32m                    return (o2.getValue()).compareTo(o1.getValue());[m
+[32m+[m[32m                }[m
+[32m+[m[32m            });[m
+[32m+[m
+[32m+[m[32m            // put data from sorted list to hashmap[m
+[32m+[m[32m            HashMap<Integer, Integer> temp = new LinkedHashMap<Integer, Integer>();[m
+[32m+[m[32m            for (Map.Entry<Integer, Integer> aa : list) {[m
+[32m+[m[32m                temp.put(aa.getKey(), aa.getValue());[m
+[32m+[m[32m            }[m
+[32m+[m[32m            return temp;[m
+[32m+[m[32m        }[m
+[32m+[m
+[32m+[m
+[32m+[m
+[32m+[m
+[32m+[m[32m        public boolean isPossible(int[] nums) {[m
+[32m+[m[32m            HashMap<Integer,Integer> map =new HashMap<>(), req = new HashMap<>();[m
+[32m+[m[32m            for(int num : nums) map.put(num,map.getOrDefault(num,0)+1);[m
+[32m+[m[32m            for (int num : nums) {[m
+[32m+[m[32m                if(map.getOrDefault(num,0) > 0 &&[m
+[32m+[m[32m                        req.getOrDefault(num,0) > 0){[m
+[32m+[m[32m                    map.put(num,map.get(num)-1);[m
+[32m+[m[32m                    req.put(num,req.get(num)-1);[m
+[32m+[m[32m                    req.put(num+1,req.getOrDefault(num+1,0)+1);[m
+[32m+[m[32m                }[m
+[32m+[m
+[32m+[m[32m                else if(map.getOrDefault(num,0) > 0 &&[m
+[32m+[m[32m                        map.getOrDefault(num+1,0) > 0 &&[m
+[32m+[m[32m                        map.getOrDefault(num+2,0) > 0) {[m
+[32m+[m[32m                    map.put(num,map.get(num)-1);[m
+[32m+[m[32m                    map.put(num+1,map.get(num+1)-1);[m
+[32m+[m[32m                    map.put(num+2,map.get(num+2)-1);[m
+[32m+[m[32m                    req.put(num+3,req.getOrDefault(num+3,0)+1);[m
+[32m+[m[32m                }[m
+[32m+[m
+[32m+[m[32m                else if(map.getOrDefault(num,0) > 0) return false;[m
+[32m+[m[32m            }[m
+[32m+[m[32m            return true;[m
+[32m+[m[32m        }[m
+[32m+[m
+[32m+[m
+[32m+[m
+[32m+[m[32m        public boolean isPalindrome(ListNode head) {[m
+[32m+[m[32m            ListNode[] h = {head};[m
+[32m+[m[32m            ListNode t = head;[m
+[32m+[m[32m            return isPalindrome_helper(h,t);[m
+[32m+[m[32m        }[m
+[32m+[m[32m        private boolean isPalindrome_helper(ListNode[] left, ListNode right) {[m
+[32m+[m[32m            if(right == null) return true;[m
+[32m+[m[32m            boolean flag = isPalindrome_helper(left, right.next) && left[0].val == right.val;[m
+[32m+[m[32m            left[0] = left[0].next;[m
+[32m+[m[32m            return flag;[m
+[32m+[m[32m        }[m
+[32m+[m
+[32m+[m
+[32m+[m
+[32m+[m
+[32m+[m[32m        public String convert(String s, int numRows) {[m
+[32m+[m[32m            if(s.length() <= numRows || numRows == 1) return s;[m
+[32m+[m[32m            StringBuilder sb = new StringBuilder();[m
+[32m+[m[32m            boolean down = false;[m
+[32m+[m[32m            int curRow = 0;[m
+[32m+[m[32m            List<StringBuilder> rows = new ArrayList<>();[m
+[32m+[m[32m            for (int i = 0; i < Math.min(numRows, s.length()); i++) {[m
+[32m+[m[32m                rows.add(new StringBuilder());[m
+[32m+[m[32m            }[m
+[32m+[m[32m            for (char ch : s.toCharArray()) {[m
+[32m+[m[32m                rows.get(curRow).append(ch);[m
+[32m+[m[32m                if(curRow == 0 || curRow == numRows - 1) down = !down;[m
+[32m+[m[32m                curRow += down ? 1 : -1;[m
+[32m+[m[32m            }[m
+[32m+[m[32m            for(StringBuilder row : rows) sb.append(row);[m
+[32m+[m[32m            return sb.toString();[m
+[32m+[m[32m        }[m
+[32m+[m
+[32m+[m
+[32m+[m
+[32m+[m
+[32m+[m[32m        public List<List<Integer>> combinationSum2(int[] candidates, int target) {[m
+[32m+[m[32m            List<List<Integer>> list = new ArrayList<>();[m
+[32m+[m[32m            Arrays.sort(candidates);[m
+[32m+[m[32m            helper_combinationSum2(list, new ArrayList<>(), candidates, 0, target);[m
+[32m+[m[32m            return list;[m
+[32m+[m[32m        }[m
+[32m+[m
+[32m+[m[32m        public void helper_combinationSum2(List<List<Integer>> list, List<Integer> temp, int[] candidates, int start, int target) {[m
+[32m+[m[32m            // base case[m
+[32m+[m[32m            if(target == 0) {[m
+[32m+[m[32m               list.add(new ArrayList<>(temp));[m
+[32m+[m[32m                return;[m
+[32m+[m[32m            }[m
+[32m+[m[32m            for (int nextCurr = start; nextCurr < candidates.length; ++nextCurr) {[m
+[32m+[m[32m                if(nextCurr < start && candidates[nextCurr] == candidates[nextCurr-1]) continue;[m
+[32m+[m[32m                Integer pick = candidates[nextCurr];[m
+[32m+[m[32m                if(target - pick < 0) break;[m
+[32m+[m[32m                temp.add(pick);[m
+[32m+[m[32m                helper_combinationSum2(list,temp,candidates,start+1,target-pick);[m
+[32m+[m[32m                temp.remove(temp.size()-1);[m
+[32m+[m[32m            }[m
+[32m+[m
+[32m+[m[32m        }[m
+[32m+[m
+[32m+[m
+[32m+[m
+[32m+[m
+[32m+[m[32m        public String pushDominoes(String dominoes) {[m
+[32m+[m[32m            char[] domino = dominoes.toCharArray();[m
+[32m+[m[32m            char[] res = domino;[m
+[32m+[m[32m            int pointer = 0;[m
+[32m+[m[32m            for (int i = 0; i < domino.length; i++) {[m
+[32m+[m[32m                switch (domino[i]) {[m
+[32m+[m[32m                    case '.': continue;[m
+[32m+[m[32m                    case 'L':[m
+[32m+[m[32m                        pointer = i-1;[m
+[32m+[m[32m                        while (pointer >= 0 && domino[pointer] == '.'){pointer--;}[m
+[32m+[m[32m                        if(pointer < 0 || domino[pointer] == 'L') {[m
+[32m+[m[32m                            if(pointer < 0) pointer = 0;[m
+[32m+[m[32m                            Arrays.fill(res, pointer, i+1, 'L');[m
+[32m+[m[32m                        }[m
+[32m+[m[32m                        break;[m
+[32m+[m[32m                    case 'R':[m
+[32m+[m[32m                        pointer = i+1;[m
+[32m+[m[32m                        while (pointer < domino.length && domino[pointer] == '.'){pointer++;}[m
+[32m+[m[32m                        if(pointer >= domino.length || domino[pointer] == 'R') {[m
+[32m+[m[32m                            if(pointer >= domino.length) pointer = domino.length - 1;[m
+[32m+[m[32m                            Arrays.fill(res, i, pointer+1, 'R');[m
+[32m+[m[32m                        }[m
+[32m+[m[32m                        else {[m
+[32m+[m[32m                            if(pointer == i+1) {[m
+[32m+[m[32m                                i = pointer;[m
+[32m+[m[32m                                continue;[m
+[32m+[m[32m                            }[m
+[32m+[m[32m                            int from,to;[m
+[32m+[m[32m                            to = ((pointer - 1) - (i + 1)) / 2 + i + 1;[m
+[32m+[m[32m                            if((pointer + i + 1) % 2 == 0) from = ++to;[m
+[32m+[m[32m                            else from = to+1;[m
+[32m+[m[32m                            Arrays.fill(res, i, to, 'R');[m
+[32m+[m[32m                            Arrays.fill(res, from, pointer, 'L');[m
+[32m+[m[32m                            i = pointer;[m
+[32m+[m[32m                        }[m
+[32m+[m[32m                }[m
+[32m+[m[32m            }[m
+[32m+[m[32m            return String.valueOf(res);[m
+[32m+[m[32m        }[m
+[32m+[m
+[32m+[m
+[32m+[m
+[32m+[m
+[32m+[m[32m        public List<Integer> findClosestElements(int[] arr, int k, int x) {[m
+[32m+[m[32m            List<Integer> res = new ArrayList<>(k);[m
+[32m+[m[32m            int index = Arrays.binarySearch(arr,x);[m
+[32m+[m[32m            if(index < 0) index = -(index + 1);[m
+[32m+[m[32m            boolean left = true, right = true;[m
+[32m+[m[32m            int l = index-1, r = index;[m
+[32m+[m
+[32m+[m[32m            if(index == 0) left = false;[m
+[32m+[m[32m            if(index == arr.length) right = false;[m
+[32m+[m
+[32m+[m[32m            while (res.size() < k) {[m
+[32m+[m[32m                if(left && right) {[m
+[32m+[m[32m                    int tempLeft = arr[l], tempRight = arr[r];[m
+[32m+[m[32m                    int a = Math.abs(tempLeft - x), b = Math.abs(tempRight - x);[m
+[32m+[m[32m                    if(a < b) {[m
+[32m+[m[32m                        res.add(tempLeft);[m
+[32m+[m[32m                        l--;[m
+[32m+[m[32m                    }[m
+[32m+[m[32m                    else if(b < a) {[m
+[32m+[m[32m                        res.add(tempRight);[m
+[32m+[m[32m                        r++;[m
+[32m+[m[32m                    }[m
+[32m+[m[32m                    else {[m
+[32m+[m[32m                        res.add(Math.min(tempLeft, tempRight));[m
+[32m+[m[32m                        l--;[m
+[32m+[m[32m                    }[m
+[32m+[m
+[32m+[m[32m                    if(l < 0) left = false;[m
+[32m+[m[32m                    if(r >= arr.length) right = false;[m
+[32m+[m[32m                    continue;[m
+[32m+[m[32m                }[m
+[32m+[m[32m                if(left) {[m
+[32m+[m[32m                    res.add(arr[l--]);[m
+[32m+[m[32m                    if(l < 0) left = false;[m
+[32m+[m[32m                    continue;[m
+[32m+[m[32m                }[m
+[32m+[m[32m                if(right) {[m
+[32m+[m[32m                    res.add(arr[r++]);[m
+[32m+[m[32m                    if(r >= arr.length) right = false;[m
+[32m+[m[32m                }[m
+[32m+[m[32m            }[m
+[32m+[m[32m            Collections.sort(res);[m
+[32m+[m[32m            return res;[m
+[32m+[m[32m        }[m
+     }[m
+ }[m
+ [m
+
+[33mcommit c96d559a672e05210630001ff47599adff081441[m
+Author: Killua <ibrahimtarekeslim@gmail.com>
+Date:   Wed Aug 10 16:19:21 2022 +0300
+
+    316 Solved || 10:08:2022 04:19 PM
+
+[1mdiff --git a/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$KthLargest.class b/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$KthLargest.class[m
+[1mnew file mode 100644[m
+[1mindex 0000000..d6640bb[m
+Binary files /dev/null and b/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$KthLargest.class differ
+[1mdiff --git a/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$ListNode.class b/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$ListNode.class[m
+[1mindex aa4f92a..a67a0b7 100644[m
+Binary files a/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$ListNode.class and b/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$ListNode.class differ
+[1mdiff --git a/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$NNode.class b/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$NNode.class[m
+[1mindex 3951e08..ea1cd95 100644[m
+Binary files a/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$NNode.class and b/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$NNode.class differ
+[1mdiff --git a/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$NNumArray$MyCalendar.class b/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$NNumArray$MyCalendar.class[m
+[1mnew file mode 100644[m
+[1mindex 0000000..7fe912a[m
+Binary files /dev/null and b/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$NNumArray$MyCalendar.class differ
+[1mdiff --git a/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$NNumArray.class b/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$NNumArray.class[m
+[1mnew file mode 100644[m
+[1mindex 0000000..4a17d23[m
+Binary files /dev/null and b/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$NNumArray.class differ
+[1mdiff --git a/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$Node.class b/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$Node.class[m
+[1mindex ebe825d..b6eac92 100644[m
+Binary files a/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$Node.class and b/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$Node.class differ
+[1mdiff --git a/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$NumArray.class b/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$NumArray.class[m
+[1mindex 4b699ed..c5f786f 100644[m
+Binary files a/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$NumArray.class and b/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$NumArray.class differ
+[1mdiff --git a/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$StringFreq.class b/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$StringFreq.class[m
+[1mindex f7f31aa..01f998f 100644[m
+Binary files a/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$StringFreq.class and b/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$StringFreq.class differ
+[1mdiff --git a/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$TreeNode.class b/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$TreeNode.class[m
+[1mindex 3f2ac68..dc1de4c 100644[m
+Binary files a/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$TreeNode.class and b/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$TreeNode.class differ
+[1mdiff --git a/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$TreeNodeExtra.class b/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$TreeNodeExtra.class[m
+[1mindex 918b22d..a071647 100644[m
+Binary files a/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$TreeNodeExtra.class and b/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution$TreeNodeExtra.class differ
+[1mdiff --git a/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution.class b/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution.class[m
+[1mindex e49ece6..a24709f 100644[m
+Binary files a/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution.class and b/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm$Solution.class differ
+[1mdiff --git a/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm.class b/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm.class[m
+[1mindex e43766c..6793c87 100644[m
+Binary files a/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm.class and b/out/production/LeetCode_Problems/LeetCode_Problems/Problems_Algorithm.class differ
+[1mdiff --git a/src/LeetCode_Problems/Problems_Algorithm.java b/src/LeetCode_Problems/Problems_Algorithm.java[m
+[1mindex 83a75f5..c2074fa 100644[m
+[1m--- a/src/LeetCode_Problems/Problems_Algorithm.java[m
+[1m+++ b/src/LeetCode_Problems/Problems_Algorithm.java[m
+[36m@@ -1,6 +1,9 @@[m
+ package LeetCode_Problems;[m
+ [m
+ import java.util.*;[m
+[32m+[m[32mimport java.util.stream.Collectors;[m
+[32m+[m[32mimport java.util.stream.IntStream;[m
+[32m+[m[32mimport java.util.stream.LongStream;[m
+ [m
+ [m
+ public class Problems_Algorithm {[m
+[36m@@ -36,7 +39,7 @@[m [mpublic class Problems_Algorithm {[m
+ //        right.left = rightleft;[m
+         right.right = rightright;[m
+ [m
+[31m-        int[][] in = new int[][]{{1, 3, 2, 2, 5, 2, 3, 7}, {1, 1, 1, 0}, {0, 1, 0, 0}, {1, 1, 0, 0}};[m
+[32m+[m[32m        int[][] in = new int[][]{{1, 2,3}, {5, 8, 8, 5}, {0, 1, 0, 0}, {1, 1, 0, 0}};[m
+         String[][] strings = new String[][]{{"5", "2", "C", "D", "+"}, {"adsdf", "sfd"}, {"z"}};[m
+ [m
+ [m
+[36m@@ -63,8 +66,7 @@[m [mpublic class Problems_Algorithm {[m
+ [505870226,437526072,266740649,224336793,532917782,311122363,567754492,595798950,81520022,684110326,137742843,275267355,856903962,148291585,919054234,467541837,622939912,116899933,983296461,536563513][m
+          */[m
+ [m
+[31m-        System.out.println(solution.calPoints(strings[0]));[m
+[31m-[m
+[32m+[m[32m        System.out.println(solution.permuteUnique(in[0]));[m
+     }[m
+ [m
+     static class Solution {[m
+[36m@@ -149,6 +151,24 @@[m [mpublic class Problems_Algorithm {[m
+             }[m
+         }[m
+ [m
+[32m+[m
+[32m+[m[32m        class GNode {[m
+[32m+[m[32m            public int val;[m
+[32m+[m[32m            public List<GNode> neighbors;[m
+[32m+[m[32m            public GNode() {[m
+[32m+[m[32m                val = 0;[m
+[32m+[m[32m                neighbors = new ArrayList<GNode>();[m
+[32m+[m[32m            }[m
+[32m+[m[32m            public GNode(int _val) {[m
+[32m+[m[32m                val = _val;[m
+[32m+[m[32m                neighbors = new ArrayList<GNode>();[m
+[32m+[m[32m            }[m
+[32m+[m[32m            public GNode(int _val, ArrayList<GNode> _neighbors) {[m
+[32m+[m[32m                val = _val;[m
+[32m+[m[32m                neighbors = _neighbors;[m
+[32m+[m[32m            }[m
+[32m+[m[32m        }[m
+[32m+[m
+         ;[m
+ //[m
+ //        //Problem: Reverse an Integer: 123 ==> 321 , 10 ==> 01[m
+[36m@@ -6278,7 +6298,7 @@[m [mpublic class Problems_Algorithm {[m
+         public int findLengthOfLCIS(int[] nums) {[m
+             int max = 0, temp = 1;[m
+             for (int i = 1; i < nums.length; i++) {[m
+[31m-                if(nums[i] > nums[i-1]) temp++;[m
+[32m+[m[32m                if (nums[i] > nums[i - 1]) temp++;[m
+                 else {[m
+                     max = Math.max(max, temp);[m
+                     temp = 0;[m
+[36m@@ -6289,13 +6309,10 @@[m [mpublic class Problems_Algorithm {[m
+         }[m
+ [m
+ [m
+[31m-[m
+[31m-[m
+[31m-[m
+         public boolean isOneBitCharacter(int[] bits) {[m
+             boolean res = false;[m
+             for (int i = 0; i < bits.length; i++) {[m
+[31m-                if(bits[i] == 1) {[m
+[32m+[m[32m                if (bits[i] == 1) {[m
+                     i++;[m
+                     res = false;[m
+                     continue;[m
+[36m@@ -6306,16 +6323,15 @@[m [mpublic class Problems_Algorithm {[m
+         }[m
+ [m
+ [m
+[31m-[m
+[31m-[m
+         class KthLargest {[m
+ [m
+             PriorityQueue<Integer> pk;[m
+             int k;[m
+[32m+[m
+             public KthLargest(int k, int[] nums) {[m
+                 this.k = k;[m
+                 pk = new PriorityQueue<>();[m
+[31m-                for(int num : nums) pk.add(num);[m
+[32m+[m[32m                for (int num : nums) pk.add(num);[m
+                 while (pk.size() > k) pk.poll();[m
+             }[m
+ [m
+[36m@@ -6327,24 +6343,24 @@[m [mpublic class Problems_Algorithm {[m
+         }[m
+ [m
+ [m
+[31m-[m
+[31m-[m
+         public int[][] diagonalSort(int[][] mat) {[m
+             List<Integer> xLine = new LinkedList<>(), yLine = new LinkedList<>();[m
+             List<Integer> vals = new ArrayList<>();[m
+[31m-            int x,y;[m
+[31m-            for (int i = mat.length-1; i >= 0; i--) {[m
+[32m+[m[32m            int x, y;[m
+[32m+[m[32m            for (int i = mat.length - 1; i >= 0;
