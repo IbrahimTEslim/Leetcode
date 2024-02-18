@@ -67,7 +67,7 @@ public class Problems_Algorithm {
 
 //        rightright.right = rightrightright;
 
-        int[][] in = new int[][]{{1,3,5,7}, {10,11,16,20}, {23,30,34,60}};
+        int[][] in = new int[][]{{1,27}, {29,49}, {47,49},{41,43},{15,36},{11,15}};
         char[][] ch = new char[][]{{'+', '.', '+', '+', '+', '+', '+'}, {'+', '.', '+', '.', '.', '.', '+'}, {'+', '.', '+', '.', '+', '.', '+'},
                 {'+', '.', '.', '.', '.', '.', '+'}, {'+', '+', '+', '+', '.', '+', '.'}};
         String[][] strings = new String[][]{{"hello","leetcode"}, {"word","world","row"}, {"ads", "df", "s", "fd"}};
@@ -96,7 +96,7 @@ public class Problems_Algorithm {
         "mkgfzkkuxownxvfvxasy"
 [505870226,437526072,266740649,224336793,532917782,311122363,567754492,595798950,81520022,684110326,137742843,275267355,856903962,148291585,919054234,467541837,622939912,116899933,983296461,536563513]
          */
-        System.out.println(solution.copyRandomList(headR));
+        System.out.println(solution.mostBooked(3,in));
 
         System.out.println("Done");
     }
@@ -8025,6 +8025,37 @@ public class Problems_Algorithm {
                 if(bricks < 0) return i;
             }
             return heights.length-1;
+        }
+
+
+
+
+        public int mostBooked(int n, int[][] meetings) {
+            Arrays.sort(meetings, (a,b) -> a[0] - b[0]);
+            PriorityQueue<long[]> pq = new PriorityQueue<>(
+                    (a,b) -> (int) (a[0] == b[0] ? (a[1] - b[1]) : (a[0] - b[0]))
+            );
+            int[] rooms = new int[n];
+            int res = 0;
+            for (int i = 0; i < n; i++) {
+                pq.add(new long[]{0,i});
+            }
+            for(int[] meet:meetings){
+                while (pq.peek()[0] < meet[0])
+                    pq.add(new long[]{meet[0], pq.poll()[1]});
+                long[] cur = pq.poll();
+                int cur_room = (int) cur[1];
+                long meeting_time = cur[0] + meet[1] - meet[0];
+                rooms[(int) cur[1]]++;
+
+                if(rooms[cur_room] > rooms[res])
+                    res = cur_room;
+                else if(rooms[cur_room] == rooms[res])
+                    res = Math.min(res, cur_room);
+
+                pq.add(new long[]{meeting_time, cur_room});
+            }
+            return res;
         }
 
     }
